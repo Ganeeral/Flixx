@@ -140,6 +140,11 @@ body {
   background: linear-gradient(144.63deg, rgb(235, 63, 109) 21.398%,rgb(113, 40, 118) 93.624%);
 }
 
+.addBtn{
+  background: linear-gradient(114.63deg, rgb(235, 63, 109) 21.398%,rgb(113, 40, 118) 93.624%);
+  margin-top: 30px;
+}
+
 @media (min-width: 577px) {
   .input__container {
     border-radius: 30px;

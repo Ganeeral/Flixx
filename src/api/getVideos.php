@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "flix_db";
+$dbname = "db_flix";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

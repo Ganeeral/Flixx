@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "flix_db";
+    $dbname = "db_flix";
 
     // Подключение к базе данных
     $mysqli = new mysqli($servername, $username, $password, $dbname);
