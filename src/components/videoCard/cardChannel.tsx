@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { TrashIcon, PenciIcon } from "@/ui/icons/index";
+import { useRouter } from "next/navigation";
+import Edit from "@/app/edit/page";
 
 interface Video {
   id: number;
@@ -12,28 +14,37 @@ interface Video {
   author_avatar: string;
 }
 
-const Card: React.FC<{ video: Video; updateVideos: () => void }> = ({ video, updateVideos }) => {
+const Card: React.FC<{ video: Video; updateVideos: () => void }> = ({
+  video,
+  updateVideos,
+}) => {
+  const router = useRouter();
 
-    const handleDeleteVideo = async () => {
-        try {
-     
-          const response = await fetch(`http://kursach/src/api/deleteVideos.php?id=${video.id}`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json"
-            }
-          });
-    
-          if (response.ok) {
-            updateVideos();
-    
-          } else {
-            console.error("Не удалось удалить видео!");
-          }
-        } catch (error) {
-          console.error("Ошибка удаления видео:", error);
+  const handleEditVideo = () => {
+    router.push(`/edit/${video.id}`);
+  };
+  
+  const handleDeleteVideo = async () => {
+    try {
+      const response = await fetch(
+        `http://Flixx/src/api/deleteVideos.php?id=${video.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      };
+      );
+
+      if (response.ok) {
+        updateVideos();
+      } else {
+        console.error("Не удалось удалить видео!");
+      }
+    } catch (error) {
+      console.error("Ошибка удаления видео:", error);
+    }
+  };
 
   return (
     <div className="max-w-[513px] w-full mx-auto rounded-2xl">
@@ -74,7 +85,10 @@ const Card: React.FC<{ video: Video; updateVideos: () => void }> = ({ video, upd
           </div>
         </div>
         <div className=" flex justify-center gap-x-[48px] w-full">
-          <div className="cursor-pointer card__btn items-center text-white gap-x-1 text-xs flex py-[5px] rounded-md px-[14px]">
+          <div
+            onClick={handleEditVideo}
+            className="cursor-pointer card__btn items-center text-white gap-x-1 text-xs flex py-[5px] rounded-md px-[14px]"
+          >
             <PenciIcon size={20} />
             <span>Редактировать</span>
           </div>

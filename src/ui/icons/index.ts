@@ -23,6 +23,7 @@ import VideosIcon from "@/ui/icons/videosIcon.svg"
 import HomeIcon from "@/ui/icons/homeIcon.svg"
 import TrashIcon from "@/ui/icons/trashIcon.svg"
 import PenciIcon from "@/ui/icons/pencilIcon.svg"
+import UploadIcon from "@/ui/icons/uploadIcon.svg"
 
 export {
   BurgerIcon,
@@ -50,4 +51,5 @@ export {
   HomeIcon,
   TrashIcon,
   PenciIcon,
+  UploadIcon,
 };

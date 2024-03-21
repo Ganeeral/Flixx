@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import SearchBar from "@/components/searchbar/search";
 import HeaderLinks from "../headerLinks/headerLinks";
@@ -8,7 +9,7 @@ const Header = () => {
     <header className="fixed hidden tablet-s:block top-0 w-full bg-white z-20">
       <div className="flex justify-between">
         <div className="max-w-[248px] w-full ">
-          <SideBar />
+            <SideBar />
         </div>
         <div className="flex-grow contents text-center">
           <SearchBar />

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Separator from "../separator/separator";
 import React from "react";
 import { usePathname } from "next/navigation";
@@ -108,39 +108,37 @@ export default function Home() {
 
     setActive(true);
   };
-  const showLess = () => {
+  const showLess = useCallback(() => {
     setIsColumn(true);
     controls.start({
       width: "84px",
       transition: { duration: 0.001 },
     });
-
+  
     controlText.start({
       opacity: 0,
       display: "none",
     });
-
+  
     controlTextUp.start({
       opacity: 1,
       display: "block",
     });
-
+  
     controlTitleText.start({
       opacity: 0,
     });
-
-
+  
     setActive(false);
-  };
+  }, [setIsColumn, controls, controlText, controlTextUp, controlTitleText, setActive]);
+  
 
   useEffect(() => {
     showLess();
-  }, []);
+  }, [showLess]);
 
   return (
-    <div
-      className={`max-w-[248px] hidden tablet-s:block w-full`}
-    >
+    <div className={`max-w-[248px] hidden tablet-s:block w-full`}>
       <div className={`max-w-[248px] z-20 absolute `}>
         <motion.div
           animate={controls}
@@ -161,8 +159,8 @@ export default function Home() {
             {!active && (
               <BurgerIcon className="cursor-pointer" onClick={showMore} />
             )}
-            <Link legacyBehavior href="/">
-              <a>
+            <div>
+              <Link href="/">
                 <svg
                   width="48"
                   height="26"
@@ -188,8 +186,8 @@ export default function Home() {
                     </linearGradient>
                   </defs>
                 </svg>
-              </a>
-            </Link>
+              </Link>
+            </div>
           </div>
           <div
             className="mt-5"
@@ -210,8 +208,8 @@ export default function Home() {
               >
                 {group.items.map((item, index2) => (
                   <React.Fragment key={index2}>
-                    <Link legacyBehavior href={item.to}>
-                      <a
+                    <Link href={item.to}>
+                      <div
                         className={`sideBar__item flex flex-col px-6 py-4 cursor-pointer ${
                           pathname === item.to
                             ? "sideBar__item active"
@@ -238,7 +236,7 @@ export default function Home() {
                             {item.title}
                           </motion.p>
                         </div>
-                      </a>
+                      </div>
                     </Link>
                     {!isColumn && <Separator />}
                   </React.Fragment>
@@ -254,17 +252,18 @@ export default function Home() {
                     animate={controlTitleText}
                     className="my-[14px] ml-4 flex items-center gap-x-2 px-2 text-sm font-bold text-white"
                   >
-                    <Link legacyBehavior href={"/channel"}>
-                      <a className="flex items-center gap-x-2">
-                        {group.name} <ChevronRight />
-                      </a>
+                    <Link
+                      className="flex items-center gap-x-2"
+                      href={"/channel"}
+                    >
+                      {group.name} <ChevronRight />
                     </Link>
                   </motion.p>
 
                   {group.items.map((item, index2) => (
                     <React.Fragment key={index2}>
-                      <Link legacyBehavior href={item.to}>
-                        <a
+                      <Link href={item.to}>
+                        <div
                           className={`sideBar__item flex items-center px-6 py-4 cursor-pointer ${
                             pathname === item.to
                               ? "sideBar__item active"
@@ -282,7 +281,7 @@ export default function Home() {
                             {" "}
                             {item.title}
                           </motion.p>
-                        </a>
+                        </div>
                       </Link>
                       {<Separator />}
                     </React.Fragment>

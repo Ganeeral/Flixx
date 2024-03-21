@@ -65,7 +65,7 @@ function AddVideoPage() {
       formDataToSend.append("description", formData.description);
       formDataToSend.append("preview", formData.preview);
       formDataToSend.append("video", formData.video);
-      const response = await fetch("http://Flix/src/api/addVideo.php", {
+      const response = await fetch("http://Flixx/src/api/addVideo.php", {
         method: "POST",
         body: formDataToSend,
       });

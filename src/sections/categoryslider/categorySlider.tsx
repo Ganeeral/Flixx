@@ -40,18 +40,16 @@ const Slider: React.FC = () => {
           <div className="flex gap-x-6 rounded-[4px] overflow-auto scrollbar-hide relative">
             {categories.map((category, index) => (
               <div key={index} className="flex-shrink-0">
-                <Link href={category.to}>
-                  <div
-                    className={`cursor-pointer px-4 py-2 rounded-[6px] ${
-                      selectedCategory === index
-                        ? "bg-[#5C5C5C] text-white"
-                        : "bg-gray-1 text-white hover:bg-gray-2 duration-300"
-                    }`}
-                    onClick={() => handleCategoryClick(index)}
-                  >
-                    {category.title}
-                  </div>
-                </Link>
+                <div
+                  className={`cursor-pointer px-4 py-2 rounded-[6px] ${
+                    selectedCategory === index
+                      ? "bg-[#5C5C5C] text-white"
+                      : "bg-gray-1 text-white hover:bg-gray-2 duration-300"
+                  }`}
+                  onClick={() => handleCategoryClick(index)}
+                >
+                  <Link href={category.to}>{category.title}</Link>
+                </div>
               </div>
             ))}
           </div>

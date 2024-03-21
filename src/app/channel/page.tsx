@@ -21,7 +21,7 @@ function Channel() {
   useEffect(() => {
     async function fetchVideos() {
       try {
-        const response = await fetch("http://kursach/src/api/getVideos.php");
+        const response = await fetch("http://Flixx/src/api/getVideos.php");
         const data = await response.json();
 
         if (Array.isArray(data) && data.length > 0) {
@@ -39,7 +39,7 @@ function Channel() {
 
   const updateVideos = async () => {
     try {
-      const response = await fetch("http://kursach/src/api/getVideos.php");
+      const response = await fetch("http://Flixx/src/api/getVideos.php");
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
@@ -59,7 +59,7 @@ function Channel() {
     <div className="textGradient ml-8 mt-[40px] text-2xl">
       Видео
     </div>
-      <div className="grid grid-cols-1 flix:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 m-8">
+      <div className="grid grid-cols-1 flix:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-6 m-2 flix:m-8">
         {videos.map((video: Video) => (
           <CardChannel key={video.id} video={video} updateVideos={updateVideos} />
         ))}

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Separator from "../separator/separator";
 import React from "react";
 import { usePathname } from "next/navigation";
@@ -109,7 +109,7 @@ export default function Home() {
     setActive(true);
   };
 
-  const showLess = () => {
+  const showLess = useCallback(() => {
     setIsColumn(true);
     controls.start({
       width: "0px",
@@ -126,11 +126,11 @@ export default function Home() {
     });
 
     setActive(false);
-  };
+  }, [setIsColumn, controls, controlText, controlTitleText, setActive]);
 
   useEffect(() => {
     showLess();
-  }, []);
+  }, [showLess]);
 
   return (
     <div className={`max-w-[248px] z-30 fixed tablet-s:hidden w-full`} style={{maxWidth: isColumn ? "84px" : "248px"}}>

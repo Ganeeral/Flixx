@@ -1,10 +1,8 @@
-import Sidebar from "../components/sidebar/Sidebar";
+import React from "react";
+import MainPage from "./main/page";
 
+const App = () => {
+  return <MainPage />;
+};
 
-export default function Main() {
-    return (
-        <>
-            
-        </>
-    )
-}
+export default App;
