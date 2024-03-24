@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { UploadIcon } from "@/ui/icons/index";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   videoId: string;
@@ -14,9 +14,8 @@ interface FormData {
 
 function Edit() {
   const router = useRouter();
-  const { videoId } = router.query;
   const [formData, setFormData] = useState<FormData>({
-    videoId: videoId as string, // Идентификатор редактируемого видео
+    videoId: "",
     title: "",
     description: "",
     preview: "",
@@ -29,7 +28,6 @@ function Edit() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
-    // Здесь можно загрузить данные о редактируемом видео из API и установить их в состояние формы
     const fetchVideoData = async () => {
       try {
         const response = await fetch(
@@ -130,7 +128,6 @@ function Edit() {
             encType="multipart/form-data"
             className="flex justify-center gap-y-7 flix:gap-y-0 flex-col max-w-[860px] w-full"
           >
-            {/* Добавлено поле для ввода идентификатора редактируемого видео */}
             <input
               type="hidden"
               name="videoId"
@@ -160,7 +157,6 @@ function Edit() {
                   <label htmlFor="preview" className="text-base text-gray-text">
                     Загрузка превью
                   </label>
-                  {/* Добавлен код для отображения имени загружаемого файла */}
                   <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#e7e7e7] bg-[#F5F5F5]">
                     {!previewFileName && (
                       <div className="absolute pointer">
@@ -188,7 +184,6 @@ function Edit() {
                   <label htmlFor="preview" className="text-base text-gray-text">
                     Загрузка видео
                   </label>
-                  {/* Добавлен код для отображения имени загружаемого файла */}
                   <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#e77e7e7]  bg-[#F5F5F5]">
                     {!videoFileName && (
                       <div className="absolute pointer">

@@ -1,8 +1,8 @@
+"use client";
 import React from "react";
 import Image from "next/image";
-import { TrashIcon, PenciIcon } from "@/ui/icons/index";
 import { useRouter } from "next/navigation";
-import Edit from "@/app/edit/page";
+import { TrashIcon, PenciIcon } from "@/ui/icons/index";
 
 interface Video {
   id: number;
@@ -18,8 +18,8 @@ const Card: React.FC<{ video: Video; updateVideos: () => void }> = ({
   video,
   updateVideos,
 }) => {
+  
   const router = useRouter();
-
   const handleEditVideo = () => {
     router.push(`/edit/${video.id}`);
   };

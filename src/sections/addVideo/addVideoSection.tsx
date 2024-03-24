@@ -187,7 +187,7 @@ function AddVideoPage() {
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                className="rounded-lg px-[17px] text-gray-text py-[13px] outline-none bg-[#F5F5F5] h-[176px] w-full"
+                className="rounded-lg px-[17px] text-gray-text py-[13px] outline-none bg-[#F5F5F5] h-[126px] flix:h-[176px] w-full"
                 placeholder="Введите описание видео"
                 required
               />

@@ -8,7 +8,7 @@ const headerLinks = () => {
   return (
     <>
       <div className="flex gap-x-[20px] items-center">
-        <Link href={"/addVideo"}>
+        <Link href={"/add"}>
           <CreateVideoIcon />
         </Link>
         <Link href={"/"}>

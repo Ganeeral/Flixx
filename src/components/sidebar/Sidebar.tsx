@@ -123,6 +123,7 @@ export default function Home() {
     controlTextUp.start({
       opacity: 1,
       display: "block",
+      
     });
   
     controlTitleText.start({
