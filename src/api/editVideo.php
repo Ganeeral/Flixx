@@ -6,33 +6,30 @@ header("Content-Type: application/json");
 
 $servername = "localhost";
 $username = "root";
-$password = ""; 
-$dbname = "db_flix"; 
+$password = "";
+$dbname = "db_flix";
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = $_POST['id'];
+    $title = $_POST['title'];
+    $description = $_POST['description'];
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
-  
-  if (isset($_POST['id'], $_POST['title'], $_POST['description'], $_POST['preview'])) {
+    if ($conn->connect_error) {
+        die('Ошибка подключения к базе данных: ' . $conn->connect_error);
+    }
 
-      $id = $_POST['id'];
-      $title = $_POST['title'];
-      $description = $_POST['description'];
-      $preview = $_POST['preview'];
+    $sql = "UPDATE Videos SET title='$title', description='$description' WHERE id='$id'";
 
-      $sql = "UPDATE Videos SET title='$title', description='$description', preview='$preview' WHERE id=$id";
-  
-      if ($conn->query($sql) === TRUE) {
-        echo "Видео удачно обновлено";
-      } else {
-        echo "Ошибка обновления видео: " . $conn->error;
-      }
-  } else {
-      echo "Отсутствуют требуемые параметры";
-  }
-  
-  $conn->close();
+    if ($conn->query($sql) === TRUE) {
+        echo json_encode(["message" => "Видео успешно отредактировано"]);
+    } else {
+        echo json_encode(["error" => "Ошибка при редактировании видео: " . $conn->error]);
+    }
+
+    $conn->close();
+} else {
+    echo json_encode(["error" => "Метод не разрешен"]);
+}
 ?>

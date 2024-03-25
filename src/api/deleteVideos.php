@@ -9,25 +9,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 if (isset($_GET['id'])) {
-    $videoId = intval($_GET['id']); // Преобразуем id в целое число
+    $videoId = intval($_GET['id']);
     if ($videoId <= 0) {
         echo "Ошибка: Некорректный ID видео.";
         exit;
     }
 
-    // Параметры подключения к базе данных
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "db_flix";
 
-    // Подключение к базе данных
     $mysqli = new mysqli($servername, $username, $password, $dbname);
     if ($mysqli->connect_error) {
         die('Ошибка подключения к базе данных: ' . $mysqli->connect_error);
     }
 
-    // Подготовленный запрос на удаление видео
     $sql = "DELETE FROM videos WHERE id = ?";
     $statement = $mysqli->prepare($sql);
     if (!$statement) {
@@ -36,17 +33,14 @@ if (isset($_GET['id'])) {
         exit;
     }
 
-    // Привязываем параметр к подготовленному запросу
     $statement->bind_param("i", $videoId);
 
-    // Выполняем запрос
     if ($statement->execute()) {
         echo "Видео успешно удалено";
     } else {
         echo "Ошибка удаления видео: " . $mysqli->error;
     }
 
-    // Закрываем подготовленный запрос и соединение с базой данных
     $statement->close();
     $mysqli->close();
 } else {
