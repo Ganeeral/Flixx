@@ -9,7 +9,6 @@ interface VideoData {
   title: string;
   description: string;
   preview: File | string;
-  video: File | string;
 }
 
 interface Props {
@@ -28,7 +27,6 @@ function EditVideoPage({
     title: "",
     description: "",
     preview: "",
-    video: "",
   });
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -65,6 +63,23 @@ function EditVideoPage({
     });
   };
 
+  const handlePreviewChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target;
+    if (
+      e.target instanceof HTMLInputElement &&
+      e.target.files &&
+      e.target.files.length > 0
+    ) {
+      if (file) {
+        setPreviewFileName(e.target.files[0].name);
+        setVideoData({
+          ...videoData,
+          preview: e.target.files[0],
+        });
+      }
+    }
+  };
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     try {
@@ -73,7 +88,6 @@ function EditVideoPage({
       formDataToSend.append("title", videoData.title);
       formDataToSend.append("description", videoData.description);
       formDataToSend.append("preview", videoData.preview);
-      formDataToSend.append("video", videoData.video);
 
       const response = await fetch("http://flixx/src/api/editVideo.php", {
         method: "POST",
@@ -130,6 +144,36 @@ function EditVideoPage({
                       className="bg-inherit pl-[14px] pr-[45px] pt-[13px] pb-[8px] rounded-lg outline-none text-[#8A8A8A]"
                       required
                     />
+                  </div>
+                </div>
+                <div className="flex gap-x-4">
+                  <div className="mb-4">
+                    <label
+                      htmlFor="preview"
+                      className="text-base text-gray-text"
+                    >
+                      Загрузка превью
+                    </label>
+                    <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#e7e7e7] bg-[#F5F5F5]">
+                      {!previewFileName && (
+                        <div className="absolute pointer">
+                          <UploadIcon />
+                        </div>
+                      )}
+                      {typeof videoData.preview === "object" && (
+                        <div className="absolute pointer">
+                          {videoData.preview.name}
+                        </div>
+                      )}
+                      <input
+                        type="file"
+                        id="preview"
+                        name="preview"
+                        onChange={handlePreviewChange}
+                        accept="image/*"
+                        className="bg-inherit py-[16px] cursor-pointer opacity-0 flex rounded-lg outline-none w-full"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
