@@ -114,29 +114,35 @@ export default function Home() {
       width: "84px",
       transition: { duration: 0.001 },
     });
-  
+
     controlText.start({
       opacity: 0,
       display: "none",
     });
-  
+
     controlTextUp.start({
       opacity: 1,
       display: "block",
-      
     });
-  
+
     controlTitleText.start({
       opacity: 0,
     });
-  
+
     setActive(false);
-  }, [setIsColumn, controls, controlText, controlTextUp, controlTitleText, setActive]);
-  
+  }, [
+    setIsColumn,
+    controls,
+    controlText,
+    controlTextUp,
+    controlTitleText,
+    setActive,
+  ]);
 
   useEffect(() => {
     showLess();
   }, [showLess]);
+
 
   return (
     <div className={`max-w-[248px] hidden tablet-s:block w-full`}>
@@ -161,7 +167,7 @@ export default function Home() {
               <BurgerIcon className="cursor-pointer" onClick={showMore} />
             )}
             <div>
-              <Link href="/">
+              <Link href="/" onClick={showLess}>
                 <svg
                   width="48"
                   height="26"
@@ -209,7 +215,7 @@ export default function Home() {
               >
                 {group.items.map((item, index2) => (
                   <React.Fragment key={index2}>
-                    <Link href={item.to}>
+                    <Link href={item.to} onClick={showLess}>
                       <div
                         className={`sideBar__item flex flex-col px-6 py-4 cursor-pointer ${
                           pathname === item.to
@@ -256,6 +262,7 @@ export default function Home() {
                     <Link
                       className="flex items-center gap-x-2"
                       href={"/channel"}
+                      onClick={showLess}
                     >
                       {group.name} <ChevronRight />
                     </Link>
@@ -263,7 +270,7 @@ export default function Home() {
 
                   {group.items.map((item, index2) => (
                     <React.Fragment key={index2}>
-                      <Link href={item.to}>
+                      <Link href={item.to} onClick={showLess}>
                         <div
                           className={`sideBar__item flex items-center px-6 py-4 cursor-pointer ${
                             pathname === item.to
