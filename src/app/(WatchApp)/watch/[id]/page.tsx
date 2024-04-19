@@ -6,6 +6,8 @@ import axios from "axios";
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import { MediaPlayer, MediaProvider, Poster } from "@vidstack/react";
+import cn from "classnames";
+import Image from "next/image";
 import {
   defaultLayoutIcons,
   DefaultVideoLayout,
@@ -20,6 +22,8 @@ interface Video {
   preview: string;
   description: string;
   video_url: string;
+  author_avatar: string;
+  subscribers: number;
 }
 
 const Watch = ({
@@ -56,43 +60,47 @@ const Watch = ({
   };
 
   return (
-    // <div className="px-2 flex flex-col flex-grow gap-x-5 tablet:flex-row flix:gap-y-5">
-    //   <div className="flex flex-col">
-    //     {video && (
-    //       <>
-    //         <WatchCard preview={video.preview} videoUrl={video.preview} />
-    //         <h6 className="video__title text-base leading-5 font-bold overflow-ellipsis line-clamp-2">
-    //           {video.title}
-    //         </h6>
-    //         <button className="like-button">Like</button>
-    //         <div>Автор: {video.author}</div>
+    <div
+      className={cn(
+        "flex flex-col ml-2 mt-2 mr-2",
+        "tablet-s:ml-5 tablet-s:mr-5",
+        "tablet:flex-row gap-x-5"
+      )}
+    >
+      <div className={cn("flex flex-col gap-y-4", "")}>
+        <MediaPlayer title={video.title} src={video.video_url}>
+          <MediaProvider />
+          <DefaultVideoLayout icons={defaultLayoutIcons} />
+        </MediaPlayer>
 
-    //         <div className="description">
-    //           {video.description && expandedDescription
-    //             ? video.description
-    //             : video.description
-    //             ? `${video.description.substring(0, 100)}...`
-    //             : "Описания нету"}
-    //           {!expandedDescription && video.description && (
-    //             <button onClick={toggleDescription}>Еще</button>
-    //           )}
-    //         </div>
-    //         <div>Просмотры: {video.views}</div>
-    //         <div>Дата видео: {video.publication_date}</div>
-    //       </>
-    //     )}
-    //   </div>
-    // </div>
-    <MediaPlayer title="New" src={video.video_url}>
-      <MediaProvider>
-        <Poster
-          className="vds-poster"
-          src="public/images/tree.jpg"
-          alt="Poster"
-        />
-      </MediaProvider>
-      <DefaultVideoLayout icons={defaultLayoutIcons} />
-    </MediaPlayer>
+        <div className={cn("")}>
+          <h3>{video.title}</h3>
+
+          <div className={cn("")}>
+            <div className="video__footer max-h-[128px] w-full items-center gap-x-4 h-auto py-6 px-4 flex">
+              <div className="h-[53px] w-[53px] rounded-full relative">
+                <Image
+                  src={video.author_avatar}
+                  alt=""
+                  fill
+                  className="rounded-full object-center object-cover"
+                />
+              </div>
+              <div className="flex flex-col gap-y-1 flex-grow">
+                <div className="flex flex-col">
+                  <p className="leading-5 tracking-[-0.03em] text-black">
+                    {video.author}
+                  </p>
+                  <p className="text-xs leading-5 tracking-[-0.03em] text-nameChannel">
+                    {video.subscribers}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

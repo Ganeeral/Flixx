@@ -23,7 +23,7 @@ const HeaderMobile = () => {
                 <SearchBar />
               </div>
             </div>
-            <div className="tablet-s:mt-[18px] mr-[30px] ml-[20px] tablet-s:ml-[56px]">
+            <div className="tablet-s:mt-[18px] tablet-s:mr-[30px] mr-[8px] ml-[20px] tablet-s:ml-[56px]">
               <HeaderLinks />
             </div>
           </div>

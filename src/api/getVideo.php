@@ -13,7 +13,7 @@ $mysqli = new mysqli($servername, $username, $password, $dbname);
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $id = $mysqli->real_escape_string($_GET['id']);
-    $result = $mysqli->query("SELECT * FROM videos WHERE id=$id");
+    $result = $mysqli->query("SELECT * FROM videos LEFT JOIN Users ON Videos.author = Users.username WHERE id=$id");
     if ($result) {
         $video = $result->fetch_assoc();
         header('Content-Type: application/json');

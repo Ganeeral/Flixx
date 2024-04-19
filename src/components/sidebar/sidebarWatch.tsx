@@ -139,7 +139,7 @@ export default function Home() {
           animate={controls}
           className="sideBar max-w-[248px] animate duration-300 relative flex flex-col h-screen group "
         >
-          <div className="flex items-center p-[20px] gap-x-[16px]">
+          <div className="flex items-center pt-[20px] pb-[20px] pl-[8px] tablet-s:pl-[20px] gap-x-[16px]">
             <div>
               {active && (
                 <BurgerIcon className="cursor-pointer" onClick={showLess} />

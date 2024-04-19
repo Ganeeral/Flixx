@@ -141,7 +141,7 @@ function EditVideoPage({
                       placeholder="Введите название видео"
                       value={videoData.title}
                       onChange={handleChange}
-                      className="bg-inherit pl-[14px] pr-[45px] pt-[13px] pb-[8px] rounded-lg outline-none text-[#8A8A8A]"
+                      className="bg-inherit w-full pl-[14px] pr-[15px] pt-[13px] pb-[8px] rounded-lg outline-none text-[#8A8A8A]"
                       required
                     />
                   </div>

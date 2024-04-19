@@ -12,7 +12,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 790);
+      setIsMobile(window.innerWidth <= 789);
     };
     window.addEventListener("resize", handleResize);
     handleResize();

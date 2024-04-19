@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/app/globals.css";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Видеохостинг - Flix",
   description: "Сайт видеохостинга Flix",
+  icons: {
+    icon: {
+      url: "public/faviconWhite.svg",
+    },
+  },
 };
 
 export default function RootLayout({

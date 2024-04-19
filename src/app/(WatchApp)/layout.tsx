@@ -1,4 +1,7 @@
 import HeaderWatch from "@/components/header/headerWatch";
+import "@/app/globals.css";
+
+
 export default function WatchLayout({
   children,
 }: {

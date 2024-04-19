@@ -109,17 +109,17 @@ function AddVideoPage() {
                   Название
                 </label>
                 <div className="max-w-[270px] mt-[10px] max-h-[45px] h-full w-full rounded-lg bg-[#F5F5F5]">
-                  <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    placeholder="Введите название видео"
-                    value={formData.title}
-                    onChange={handleChange}
-                    className="bg-inherit pl-[14px] pr-[45px] pt-[13px] pb-[8px] rounded-lg outline-none text-[#8A8A8A]"
-                    required
-                  />
-                </div>
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      placeholder="Введите название видео"
+                      value={formData.title}
+                      onChange={handleChange}
+                      className="bg-inherit w-full pl-[14px] pr-[15px] pt-[13px] pb-[8px] rounded-lg outline-none text-[#8A8A8A]"
+                      required
+                    />
+                  </div>
               </div>
               <div className="flex gap-x-4">
                 <div className="mb-4">
