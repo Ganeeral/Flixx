@@ -5,6 +5,7 @@ import HictoryIcon from "@/ui/icons/HictoryIcon.svg";
 import HouseIcon from "@/ui/icons/HouseIcon.svg";
 import LaterIcon from "@/ui/icons/LaterIcon.svg";
 import LikeIcon from "@/ui/icons/LikeIcon.svg";
+import LikeWhiteIcon from "@/ui/icons/LikeWhiteIcon.svg";
 import MicrophoneIcon from "@/ui/icons/MicrophoneIcon.svg";
 import MusicIcon from "@/ui/icons/MusicIcon.svg";
 import SearchIcon from "@/ui/icons/SearchIcon.svg";
@@ -24,6 +25,8 @@ import HomeIcon from "@/ui/icons/homeIcon.svg"
 import TrashIcon from "@/ui/icons/trashIcon.svg"
 import PenciIcon from "@/ui/icons/pencilIcon.svg"
 import UploadIcon from "@/ui/icons/uploadIcon.svg"
+import DislikeIcon from "@/ui/icons/DislikeIcon.svg"
+import ShareIcon from "@/ui/icons/ShareIcon.svg"
 
 export {
   BurgerIcon,
@@ -52,4 +55,7 @@ export {
   TrashIcon,
   PenciIcon,
   UploadIcon,
+  DislikeIcon,
+  ShareIcon,
+  LikeWhiteIcon,
 };

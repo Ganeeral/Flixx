@@ -1,18 +1,22 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { formatDate } from "../format/formatDate";
+import FormatWatch from "@/components/format/formatWatch";
+import { formatRelativeDate } from "../format/formatDateMain";
 
 interface Video {
   id: number;
   title: string;
   author: string;
-  views: string;
+  views: number;
   publication_date: string;
   preview: string;
   author_avatar: string;
 }
 
 const Card: React.FC<{ video: Video }> = ({ video }) => {
+  const relativeDate = formatRelativeDate(video.publication_date);
   return (
     <Link href={`/watch/${video.id}`}>
       <div className="max-w-[513px] w-full mx-auto rounded-2xl">
@@ -45,8 +49,9 @@ const Card: React.FC<{ video: Video }> = ({ video }) => {
               <p className="text-xs leading-5 tracking-[-0.03em] text-nameChannel">
                 {video.author}
               </p>
-              <p className="text-xs leading-5 tracking-[-0.03em] text-nameChannel">
-                {video.views} просмотров - {video.publication_date}
+              <p className="flex gap-x-1 text-xs leading-5 tracking-[-0.03em] text-nameChannel">
+                <FormatWatch video={video} /> • {" "}
+                {relativeDate}
               </p>
             </div>
           </div>

@@ -8,10 +8,14 @@ import "@vidstack/react/player/styles/default/layouts/video.css";
 import { MediaPlayer, MediaProvider, Poster } from "@vidstack/react";
 import cn from "classnames";
 import Image from "next/image";
+import SubscribeBtn from "@/ui/buttons/SubscribeBtn";
+import FormatSubs from "@/components/format/formatSubs";
+import LikeBtn from "@/ui/buttons/LikeBtn";
 import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from "@vidstack/react/player/layouts/default";
+import ShareBtn from "@/ui/buttons/ShareBtn";
 
 interface Video {
   id: number;
@@ -62,22 +66,27 @@ const Watch = ({
   return (
     <div
       className={cn(
-        "flex flex-col ml-2 mt-2 mr-2",
+        "flex flex-col ml-2 mr-2",
         "tablet-s:ml-5 tablet-s:mr-5",
         "tablet:flex-row gap-x-5"
       )}
     >
-      <div className={cn("flex flex-col gap-y-4", "")}>
+      <div className={cn("mt-4 flex flex-col gap-y-4", "flix:mt-2")}>
         <MediaPlayer title={video.title} src={video.video_url}>
           <MediaProvider />
           <DefaultVideoLayout icons={defaultLayoutIcons} />
         </MediaPlayer>
 
-        <div className={cn("")}>
-          <h3>{video.title}</h3>
+        <div className={cn("flex flex-col gap-y-3")}>
+          <h3 className="text-xl leading-5 text-searchText">{video.title}</h3>
 
-          <div className={cn("")}>
-            <div className="video__footer max-h-[128px] w-full items-center gap-x-4 h-auto py-6 px-4 flex">
+          <div
+            className={cn(
+              "flex flex-col gap-y-4",
+              "flix:flex-row flix:items-center"
+            )}
+          >
+            <div className="video__footer max-h-[128px] w-full items-center gap-x-4 h-auto flex">
               <div className="h-[53px] w-[53px] rounded-full relative">
                 <Image
                   src={video.author_avatar}
@@ -86,16 +95,22 @@ const Watch = ({
                   className="rounded-full object-center object-cover"
                 />
               </div>
-              <div className="flex flex-col gap-y-1 flex-grow">
-                <div className="flex flex-col">
-                  <p className="leading-5 tracking-[-0.03em] text-black">
-                    {video.author}
-                  </p>
-                  <p className="text-xs leading-5 tracking-[-0.03em] text-nameChannel">
-                    {video.subscribers}
-                  </p>
+              <div className="flex-grow flix:flex-grow-0">
+                <div className="flex justify-between gap-y-1 f gap-x-10 flex-grow">
+                  <div className="flex flex-col">
+                    <p className="leading-5 tracking-[-0.03em] text-black">
+                      {video.author}
+                    </p>
+                    <FormatSubs video={video} />
+                  </div>
+                  <SubscribeBtn />
                 </div>
               </div>
+            </div>
+
+            <div className="flex gap-x-3">
+              <LikeBtn />
+              <ShareBtn />
             </div>
           </div>
         </div>

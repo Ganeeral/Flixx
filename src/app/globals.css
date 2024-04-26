@@ -167,6 +167,36 @@ body {
   margin-top: 30px;
 }
 
+.gradientBtn {
+  background: linear-gradient(90.00deg, rgb(244, 65, 109), rgb(180, 34, 98) 100%);
+}
+
+.gradientStick {
+  background: linear-gradient(180.00deg, rgb(229, 61, 130), rgb(215, 35, 83) 100%);
+}
+
+.duration {
+  transition: .2s ease;
+}
+
+.hover:hover{
+  background: #00000015;
+  transition: .2s ease;
+  border-radius: 8px;
+}
+
+.likeHover:hover {
+  background: #00000015;
+  transition: .2s ease;
+  border-radius: 8px 0 0 8px;
+}
+
+.disHover:hover {
+  background: #00000015;
+  transition: .2s ease;
+  border-radius: 0 8px 8px 0;
+}
+
 @media (min-width: 577px) {
   .input__container {
     border-radius: 30px;

@@ -152,8 +152,8 @@ export default function Home() {
               )}
             </div>
 
-            <Link legacyBehavior href="/">
-              <a>
+            <Link href="/" onClick={showLess} passHref>
+              <span>
                 <svg
                   width="48"
                   height="26"
@@ -179,7 +179,7 @@ export default function Home() {
                     </linearGradient>
                   </defs>
                 </svg>
-              </a>
+              </span>
             </Link>
           </div>
           <div
@@ -198,8 +198,8 @@ export default function Home() {
                 <div key={index}>
                   {group.items.map((item, index2) => (
                     <React.Fragment key={index2}>
-                      <Link legacyBehavior href={item.to}>
-                        <a
+                      <Link href={item.to} onClick={showLess} passHref>
+                        <span
                           className={`sideBar__item flex items-center px-6 py-4 cursor-pointer ${
                             pathname === item.to
                               ? "sideBar__item active"
@@ -217,7 +217,7 @@ export default function Home() {
                             {" "}
                             {item.title}
                           </motion.p>
-                        </a>
+                        </span>
                       </Link>
                       {<Separator />}
                     </React.Fragment>
@@ -234,17 +234,17 @@ export default function Home() {
                     animate={controlTitleText}
                     className="my-[14px] ml-4 flex items-center gap-x-2 px-2 text-sm font-bold text-white"
                   >
-                    <Link legacyBehavior href={"/channel"}>
-                      <a className="flex items-center gap-x-2">
+                    <Link href={"/channel"} onClick={showLess} passHref>
+                      <span className="flex items-center gap-x-2">
                         {group.name} <ChevronRight />
-                      </a>
+                      </span>
                     </Link>
                   </motion.p>
 
                   {group.items.map((item, index2) => (
                     <React.Fragment key={index2}>
-                      <Link legacyBehavior href={item.to}>
-                        <a
+                      <Link href={item.to} onClick={showLess} passHref>
+                        <span
                           className={`sideBar__item flex items-center px-6 py-4 cursor-pointer ${
                             pathname === item.to
                               ? "sideBar__item active"
@@ -262,7 +262,7 @@ export default function Home() {
                             {" "}
                             {item.title}
                           </motion.p>
-                        </a>
+                        </span>
                       </Link>
                       {<Separator />}
                     </React.Fragment>

@@ -7,7 +7,7 @@ import cn from "classnames";
 const HeaderMobile = () => {
   return (
     <>
-      <header className="fixed top-0 w-full bg-white z-20">
+      <header className="fixed top-0 w-full bg-white z-20 pb-3 flix:pb-0">
         <div className="flex justify-between">
           <div className="max-w-[248px] w-full">
             <SideBarWatch />

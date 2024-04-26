@@ -10,7 +10,7 @@ interface Video {
   id: number;
   title: string;
   author: string;
-  views: string;
+  views: number;
   publication_date: string;
   preview: string;
   author_avatar: string;
