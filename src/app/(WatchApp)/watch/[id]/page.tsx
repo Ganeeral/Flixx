@@ -16,18 +16,24 @@ import {
   DefaultVideoLayout,
 } from "@vidstack/react/player/layouts/default";
 import ShareBtn from "@/ui/buttons/ShareBtn";
+import FormatWatch from "@/components/format/formatWatch";
+import { formatRelativeDate } from "@/components/format/formatDateMain";
+import VideoDescription from "@/components/videoDescription/videoDescription";
+import AboutWatch from "@/components/aboutWatch/AboutWatch";
+import SideVideo from "@/components/sideVideo/SideVideo";
 
 interface Video {
   id: number;
   title: string;
   author: string;
-  views: string;
+  views: number;
   publication_date: string;
   preview: string;
   description: string;
   video_url: string;
   author_avatar: string;
   subscribers: number;
+  username: string;
 }
 
 const Watch = ({
@@ -38,7 +44,6 @@ const Watch = ({
   };
 }) => {
   const [video, setVideo] = useState<Video | null>(null);
-  const [expandedDescription, setExpandedDescription] = useState(false);
 
   useEffect(() => {
     const fetchVideo = async () => {
@@ -59,16 +64,13 @@ const Watch = ({
     return <div>Loading...</div>;
   }
 
-  const toggleDescription = () => {
-    setExpandedDescription(!expandedDescription);
-  };
-
   return (
     <div
       className={cn(
-        "flex flex-col ml-2 mr-2",
-        "tablet-s:ml-5 tablet-s:mr-5",
-        "tablet:flex-row gap-x-5"
+        "flex flex-col mx-2 justify-center",
+        "tablet-s:mx-5",
+        "tablet:gap-x-5",
+        "desktop:flex-row"
       )}
     >
       <div className={cn("mt-4 flex flex-col gap-y-4", "flix:mt-2")}>
@@ -77,44 +79,10 @@ const Watch = ({
           <DefaultVideoLayout icons={defaultLayoutIcons} />
         </MediaPlayer>
 
-        <div className={cn("flex flex-col gap-y-3")}>
-          <h3 className="text-xl leading-5 text-searchText">{video.title}</h3>
-
-          <div
-            className={cn(
-              "flex flex-col gap-y-4",
-              "flix:flex-row flix:items-center"
-            )}
-          >
-            <div className="video__footer max-h-[128px] w-full items-center gap-x-4 h-auto flex">
-              <div className="h-[53px] w-[53px] rounded-full relative">
-                <Image
-                  src={video.author_avatar}
-                  alt=""
-                  fill
-                  className="rounded-full object-center object-cover"
-                />
-              </div>
-              <div className="flex-grow flix:flex-grow-0">
-                <div className="flex justify-between gap-y-1 f gap-x-10 flex-grow">
-                  <div className="flex flex-col">
-                    <p className="leading-5 tracking-[-0.03em] text-black">
-                      {video.author}
-                    </p>
-                    <FormatSubs video={video} />
-                  </div>
-                  <SubscribeBtn />
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-x-3">
-              <LikeBtn />
-              <ShareBtn />
-            </div>
-          </div>
-        </div>
+        <AboutWatch video={video} />
       </div>
+
+      <SideVideo />
     </div>
   );
 };

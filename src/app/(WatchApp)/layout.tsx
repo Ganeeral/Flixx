@@ -8,9 +8,10 @@ export default function WatchLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
+    <>
       <HeaderWatch />
-      <div className="mt-[54px] flix:mt-[80px]">{children}</div>
-    </section>
+      <div className="mt-[66px] flix:mt-[80px] flex-grow">{children}</div>
+    </>
+  
   );
 }

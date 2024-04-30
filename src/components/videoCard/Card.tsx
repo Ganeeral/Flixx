@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { formatDate } from "../format/formatDate";
 import FormatWatch from "@/components/format/formatWatch";
 import { formatRelativeDate } from "../format/formatDateMain";
 

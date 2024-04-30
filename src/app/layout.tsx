@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Сайт видеохостинга Flix",
   icons: {
     icon: {
-      url: "./faviconWhite.svg",
+      url: "../faviconWhite.svg",
     },
   },
 };

@@ -26,9 +26,10 @@ const FormatSubs: React.FC<ChannelInfoProps> = ({ video }) => {
   const formattedSubscribers = formatSubscribers(video.subscribers);
 
   return (
-    <p className="text-xs leading-5 tracking-[-0.03em] text-nameChannel">
+    <>
       {formattedSubscribers}
-    </p>
+    </>
+    
   );
 };
 

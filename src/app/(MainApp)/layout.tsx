@@ -11,7 +11,7 @@ export default function MainLayout({
     <div id="page">
       <HeaderMobile />
       <Header />
-      <div className="tablet-s:ml-[84px] mt-[80px]">{children}</div>
+      <div className="tablet-s:ml-[84px] mt-[80px] flex-grow">{children}</div>
     </div>
   );
 }

@@ -197,6 +197,26 @@ body {
   border-radius: 0 8px 8px 0;
 }
 
+.bg-dscr{
+  background: rgb(242, 242, 242);
+}
+
+.text-nameChannel {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2; 
+}
+
+.text-nameChannel.expanded {
+  -webkit-line-clamp: unset; 
+}
+
+.max-container{
+  max-width: 2400px;
+  margin: 0 auto;
+}
+
 @media (min-width: 577px) {
   .input__container {
     border-radius: 30px;

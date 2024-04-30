@@ -26,9 +26,9 @@ const FormatWatch: React.FC<ChannelInfoProps> = ({ video }) => {
   const formattedSubscribers = formatWatch(video.views);
 
   return (
-    <p className="text-xs leading-5 tracking-[-0.03em] text-nameChannel">
+    <>
       {formattedSubscribers}
-    </p>
+    </>
   );
 };
 

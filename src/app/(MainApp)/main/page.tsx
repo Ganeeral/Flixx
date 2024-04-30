@@ -42,7 +42,7 @@ const MainPage: React.FC = () => {
     <>
       <CategorySlider />
       <LineMain />
-      <div className="grid grid-cols-1 flix:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 m-8">
+      <div className="grid grid-cols-1 mobile:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 desktop:grid-cols-5 gap-4 m-8">
         {videos.map((video: Video) => (
           <Card key={video.id} video={video} />
         ))}
