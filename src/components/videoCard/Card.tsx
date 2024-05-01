@@ -3,16 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import FormatWatch from "@/components/format/formatWatch";
 import { formatRelativeDate } from "../format/formatDateMain";
+import { Video } from "@/types/video";
 
-interface Video {
-  id: number;
-  title: string;
-  author: string;
-  views: number;
-  publication_date: string;
-  preview: string;
-  author_avatar: string;
-}
+
 
 const Card: React.FC<{ video: Video }> = ({ video }) => {
   const relativeDate = formatRelativeDate(video.publication_date);
