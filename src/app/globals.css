@@ -179,7 +179,7 @@ body {
   transition: .2s ease;
 }
 
-.hover:hover{
+.hover:hover {
   background: #00000015;
   transition: .2s ease;
   border-radius: 8px;
@@ -197,7 +197,7 @@ body {
   border-radius: 0 8px 8px 0;
 }
 
-.bg-dscr{
+.bg-dscr {
   background: rgb(242, 242, 242);
 }
 
@@ -205,23 +205,18 @@ body {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  -webkit-line-clamp: 2; 
+  -webkit-line-clamp: 2;
 }
 
 .text-nameChannel.expanded {
-  -webkit-line-clamp: unset; 
+  -webkit-line-clamp: unset;
 }
 
-.max-container{
+.max-container {
   max-width: 2400px;
   margin: 0 auto;
 }
 
-@media (min-width: 577px) {
-  .input__container {
-    border-radius: 30px;
-  }
-}
 
 
 .input-line {
@@ -235,16 +230,36 @@ body {
   transition: width 0.3s ease, background-color 0.3s ease;
 }
 
-.input-nofocus{
+.input-nofocus {
   background-color: #585858;
   height: 1px;
   width: 100%;
 }
 
 .input-focused {
-  width: 100%!important;
+  width: 100% !important;
 }
 
-.input-nofocused{
-  width: 0!important;
+.input-nofocused {
+  width: 0 !important;
+}
+
+.notFound svg {
+  min-width: 376px;
+  max-width: 376px;
+  max-height: 157px;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width:400px) {
+  .notFound svg {
+    min-width: 0;
+  }
+}
+
+@media (min-width: 577px) {
+  .input__container {
+    border-radius: 30px;
+  }
 }

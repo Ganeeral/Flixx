@@ -27,6 +27,7 @@ import PenciIcon from "@/ui/icons/pencilIcon.svg"
 import UploadIcon from "@/ui/icons/uploadIcon.svg"
 import DislikeIcon from "@/ui/icons/DislikeIcon.svg"
 import ShareIcon from "@/ui/icons/ShareIcon.svg"
+import NotFound from "@/ui/icons/NotFound.svg";
 
 export {
   BurgerIcon,
@@ -58,4 +59,5 @@ export {
   DislikeIcon,
   ShareIcon,
   LikeWhiteIcon,
+  NotFound,
 };

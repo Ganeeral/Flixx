@@ -30,6 +30,7 @@ export const indents = {
 };
 
 export const colors = {
+  "notFound-text": "#2a2d32",
   authorPreview: "#B3B3B3",
   searchText: "#303030",
   nameChannel: "#616161",
