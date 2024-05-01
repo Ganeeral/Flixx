@@ -26,6 +26,7 @@ const Card: React.FC<{ video: Video }> = ({ video }) => {
             layout="responsive"
             width={100}
             height={100}
+            loading="lazy"
             className="rounded-2xl object-center object-cover max-h-[209px] min-h-[209px]"
           />
         </div>

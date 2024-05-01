@@ -21,6 +21,7 @@ import { formatRelativeDate } from "@/components/format/formatDateMain";
 import VideoDescription from "@/components/videoDescription/videoDescription";
 import AboutWatch from "@/components/aboutWatch/AboutWatch";
 import SideVideo from "@/components/sideVideo/SideVideo";
+import CommentsBlock from "@/components/commentsBlock/commentsBlock";
 
 interface Video {
   id: number;
@@ -44,6 +45,7 @@ const Watch = ({
   };
 }) => {
   const [video, setVideo] = useState<Video | null>(null);
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   useEffect(() => {
     const fetchVideo = async () => {
@@ -80,9 +82,17 @@ const Watch = ({
         </MediaPlayer>
 
         <AboutWatch video={video} />
+        <div className="hidden desktop:block">
+          <CommentsBlock video={video} />
+        </div>
+      </div>
+      <div className="mt-3 desktop:mt-0">
+        <SideVideo />
       </div>
 
-      <SideVideo />
+      <div className="mt-5 block desktop:hidden">
+        <CommentsBlock video={video} />
+      </div>
     </div>
   );
 };

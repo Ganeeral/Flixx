@@ -222,3 +222,29 @@ body {
     border-radius: 30px;
   }
 }
+
+
+.input-line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #303030;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.input-nofocus{
+  background-color: #585858;
+  height: 1px;
+  width: 100%;
+}
+
+.input-focused {
+  width: 100%!important;
+}
+
+.input-nofocused{
+  width: 0!important;
+}
