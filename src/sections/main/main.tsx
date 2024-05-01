@@ -5,16 +5,7 @@ import React, { useEffect, useState } from "react";
 import Card from "@/components/videoCard/Card";
 import CategorySlider from "@/sections/categoryslider/categorySlider";
 import LineMain from "@/components/lineMain/LineMain";
-
-interface Video {
-  id: number;
-  title: string;
-  author: string;
-  views: string;
-  publication_date: string;
-  preview: string;
-  author_avatar: string;
-}
+import { Video } from "@/types/video";
 
 const MainPage: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
