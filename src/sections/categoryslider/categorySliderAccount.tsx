@@ -22,7 +22,7 @@ const categories = [
   },
   {
     title: "Подписки",
-    to: "/channel",
+    to: "/subscriptions",
     icon: <SubsIcon />,
   },
   {
@@ -41,7 +41,7 @@ const SliderAccount: React.FC = () => {
 
   return (
     <div className="category flex flix:ml-5 mt-[25px]">
-      <div className="max-w-[100vw] overflow-hidden flix:max-w-[85vw]">
+      <div className="max-w-[100vw] overflow-hidden">
         <div className="flex items-center justify-between px-4">
           <div className="flex rounded-[46px] bg-[#F4F4F4] overflow-auto scrollbar-hide relative">
             {categories.map((category, index) => (

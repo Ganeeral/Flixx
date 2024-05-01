@@ -133,7 +133,7 @@ export default function Home() {
   }, [showLess]);
 
   return (
-    <div className={`max-w-[248px] z-30 fixed tablet-s:hidden w-full`} style={{maxWidth: isColumn ? "84px" : "248px"}}>
+    <div className={`max-w-[248px] z-30 fixed tablet-s:hidden w-full`} style={{maxWidth: isColumn ? "0px" : "248px"}}>
       <div className="max-w-[248px]">
         <motion.div
           animate={controls}

@@ -4,8 +4,9 @@ export const screens = {
   laptop: "1490px",
   tablet: "1100px",
   "tablet-s": "790px",
-  mobile: "577px",
   flix: "700px",
+  mobile: "577px",
+  "sm-mobile": "335px",
 };
 
 export const indents = {
@@ -32,6 +33,7 @@ export const colors = {
   authorPreview: "#B3B3B3",
   searchText: "#303030",
   nameChannel: "#616161",
+  btnBlack: "#272727",
   sideText: "#969696",
   "black-background": "#1C1D20",
   white: "#FFFFFF",
