@@ -1,24 +1,20 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { TrashIcon, PenciIcon } from "@/ui/icons/index";
 import Link from "next/link";
-
-interface Video {
-  id: number;
-  title: string;
-  author: string;
-  views: string;
-  publication_date: string;
-  preview: string;
-  author_avatar: string;
-}
+import DeleteModal from "../deleteModal/DeleteModal";
+import { Video } from "@/types/video";
+import { formatRelativeDate } from "../format/formatDateMain";
+import FormatWatch from "../format/formatWatch";
 
 const Card: React.FC<{ video: Video; updateVideos: () => void }> = ({
   video,
   updateVideos,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const relativeDate = formatRelativeDate(video.publication_date);
   const handleDeleteVideo = async () => {
     try {
       const response = await fetch(
@@ -33,6 +29,7 @@ const Card: React.FC<{ video: Video; updateVideos: () => void }> = ({
 
       if (response.ok) {
         updateVideos();
+        setIsModalOpen(false);
       } else {
         console.error("Не удалось удалить видео!");
       }
@@ -78,7 +75,7 @@ const Card: React.FC<{ video: Video; updateVideos: () => void }> = ({
                         {video.author}
                       </p>
                       <p className="text-xs leading-5 tracking-[-0.03em] text-nameChannel">
-                        {video.views} просмотров - {video.publication_date}
+                        <FormatWatch video={video} /> • {relativeDate}
                       </p>
                     </div>
                   </div>
@@ -96,7 +93,7 @@ const Card: React.FC<{ video: Video; updateVideos: () => void }> = ({
           </Link>
 
           <div
-            onClick={handleDeleteVideo}
+            onClick={() => setIsModalOpen(true)}
             className="cursor-pointer card__btn items-center text-white gap-x-1 text-xs flex py-[5px] rounded-md px-[32px]"
           >
             <TrashIcon />
@@ -104,6 +101,13 @@ const Card: React.FC<{ video: Video; updateVideos: () => void }> = ({
           </div>
         </div>
       </div>
+
+      {isModalOpen && (
+        <DeleteModal
+          onClose={() => setIsModalOpen(false)}
+          onDelete={handleDeleteVideo}
+        />
+      )}
     </>
   );
 };
