@@ -53,7 +53,7 @@ const data = [
     ],
   },
 ];
-const chanel = [
+const channel = [
   {
     name: "Мой канал",
     items: [
@@ -65,12 +65,12 @@ const chanel = [
       {
         title: "Ваши видео",
         icon: VideoIcon,
-        to: "/your-videos",
+        to: "/channel",
       },
       {
         title: "Понравившиеся",
         icon: LikeIcon,
-        to: "/liked-videos",
+        to: "/liked",
       },
       {
         title: "Смотреть позже",
@@ -253,7 +253,7 @@ export default function Home() {
           </div>
           <div>
             <motion.div animate={controlText}>
-              {chanel.map((group, index) => (
+              {channel.map((group, index) => (
                 <div key={index}>
                   <motion.p
                     animate={controlTitleText}

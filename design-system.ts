@@ -30,6 +30,7 @@ export const indents = {
 };
 
 export const colors = {
+  hoveredCard:'#414141',
   activeDrop:'#252525c5',
   background: '#181818',
   titleText: '#BBBBBB',

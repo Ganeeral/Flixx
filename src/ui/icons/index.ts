@@ -28,6 +28,8 @@ import UploadIcon from "@/ui/icons/uploadIcon.svg"
 import DislikeIcon from "@/ui/icons/DislikeIcon.svg"
 import ShareIcon from "@/ui/icons/ShareIcon.svg"
 import NotFound from "@/ui/icons/NotFound.svg";
+import DeleteItemIcon from "@/ui/icons/DeleteItemIcon.svg"
+import TrashHistoryIcon from "@/ui/icons/TrashHistoryIcon.svg"
 
 export {
   BurgerIcon,
@@ -60,4 +62,6 @@ export {
   ShareIcon,
   LikeWhiteIcon,
   NotFound,
+  DeleteItemIcon,
+  TrashHistoryIcon,
 };

@@ -1,15 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { TrashHistoryIcon, DeleteItemIcon } from "@/ui/icons";
-import cn from "classnames";
-import Image from "next/image";
-import Link from "next/link";
 import { Video } from "@/types/video";
-import CardHistory from "@/components/videoCard/CardHistory";
-import HistoryHead from "@/components/historyHead/HistoryHead";
+import CardLiked from "@/components/videoCard/CardLiked";
 
-const History = () => {
+const Liked = () => {
   const [videos, setVideos] = useState<Video[]>([]);
 
   useEffect(() => {
@@ -32,15 +27,15 @@ const History = () => {
   }, []);
   return (
     <div className="flex flex-col gap-y-4 mx-2 tablet-s:mx-10">
-      <HistoryHead />
+      <h1 className="textGradient text-4xl font-bold mt-4 flix:mt-10">Понравившиеся</h1>
 
       <div className="flex flex-col gap-y-4 w-full">
         {videos.map((video: Video, index) => (
-          <CardHistory key={video.id} video={video} index={index} />
+          <CardLiked key={video.id} video={video} index={index} />
         ))}
       </div>
     </div>
   );
 };
 
-export default History;
+export default Liked;

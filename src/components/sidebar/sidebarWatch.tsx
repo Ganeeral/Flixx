@@ -65,12 +65,12 @@ const chanel = [
       {
         title: "Ваши видео",
         icon: VideoIcon,
-        to: "/your-videos",
+        to: "/channel",
       },
       {
         title: "Понравившиеся",
         icon: LikeIcon,
-        to: "/liked-videos",
+        to: "/liked",
       },
       {
         title: "Смотреть позже",

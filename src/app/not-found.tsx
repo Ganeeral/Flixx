@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { NotFound } from "@/ui/icons";
 import Link from "next/link";
+import "@/app/globals.css";
 
 const NotFounds: React.FC = () => {
   return (
