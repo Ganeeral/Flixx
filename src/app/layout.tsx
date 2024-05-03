@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Видеохостинг - Flix",
@@ -19,8 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className="bg-white">
-        <div className="flex h-full w-full">{children}</div>
+      <body className="background__main">
+        <div className="flex grow">{children}</div>
       </body>
     </html>
   );

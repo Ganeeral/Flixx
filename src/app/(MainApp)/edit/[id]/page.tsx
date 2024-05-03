@@ -31,7 +31,6 @@ function EditVideoPage({
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [previewFileName, setPreviewFileName] = useState("");
-  const [videoFileName, setVideoFileName] = useState("");
 
   useEffect(() => {
     const fetchVideoData = async () => {

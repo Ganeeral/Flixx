@@ -6,7 +6,7 @@ import SideBar from "@/components/sidebar/Sidebar";
 
 const Header = () => {
   return (
-    <header className="fixed hidden tablet-s:block top-0 w-full bg-white z-20">
+    <header className="fixed hidden tablet-s:block top-0 w-full z-20">
       <div className="flex justify-between">
         <div className="max-w-[248px] w-full ">
           <SideBar />

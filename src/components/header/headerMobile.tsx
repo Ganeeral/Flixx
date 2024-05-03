@@ -6,7 +6,7 @@ import HeaderLinks from "../headerLinks/headerLinks";
 const HeaderMobile = () => {
   return (
     <>
-      <header className="fixed tablet-s:hidden top-0 w-full bg-white z-20">
+      <header className="fixed tablet-s:hidden top-0 w-full z-20">
         <div className="flex justify-between">
           <div>
             <SideBarMobile />

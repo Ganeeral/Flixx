@@ -22,24 +22,24 @@ const Dropdown: React.FC = () => {
           <div className="py-1">
             <Link
               onClick={toggleDropdown}
-              className="textGradient block px-4 py-2 text-sm hover:bg-gray-700"
+              className="block px-4 py-2 text-sm hover:bg-gray-100"
               href="/channel"
             >
-              Канал
+              <p className="textGradient">Канал</p>
             </Link>
             <Link
               onClick={toggleDropdown}
-              className="textGradient block px-4 py-2 text-sm hover:bg-gray-100"
-              href="/channel"
+              className="block px-4 py-2 text-sm hover:bg-gray-100"
+              href="/channel/edit"
             >
-              Ред. канал
+              <p className="textGradient">Ред. канал</p>
             </Link>
             <Link
               onClick={toggleDropdown}
-              className="textGradient block px-4 py-2 text-sm hover:bg-gray-100"
+              className="block px-4 py-2 text-sm hover:bg-gray-100"
               href="/subscriptions"
             >
-              Подписки
+              <p className="textGradient">Подписки</p>
             </Link>
           </div>
         </div>
