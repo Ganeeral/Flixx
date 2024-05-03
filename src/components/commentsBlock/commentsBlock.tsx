@@ -16,7 +16,7 @@ const CommentsBlock: React.FC<ChannelInfoProps> = ({ video }) => {
 
   return (
     <div className="flex flex-col gap-y-2">
-      <form method="POST" enctype="multipart/form-data">
+      <form method="POST">
         <h5 className="leading-5 text-white tracking-[-0.03em]">1293 комментария</h5>
         <div className="flex gap-x-3 items-center mt-5">
           <div className="h-10 w-10 rounded-full relative">
