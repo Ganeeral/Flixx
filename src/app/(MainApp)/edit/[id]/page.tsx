@@ -132,7 +132,7 @@ function EditVideoPage({
                   <label htmlFor="title" className="text-base text-gray-text">
                     Название
                   </label>
-                  <div className="max-w-[270px] mt-[10px] max-h-[45px] h-full w-full rounded-lg bg-[#F5F5F5]">
+                  <div className="max-w-[270px] mt-[10px] max-h-[45px] h-full w-full rounded-lg bg-searchText">
                     <input
                       type="text"
                       id="title"
@@ -140,7 +140,7 @@ function EditVideoPage({
                       placeholder="Введите название видео"
                       value={videoData.title}
                       onChange={handleChange}
-                      className="bg-inherit w-full pl-[14px] pr-[15px] pt-[13px] pb-[8px] rounded-lg outline-none text-[#8A8A8A]"
+                      className="bg-inherit w-full pl-[14px] pr-[15px] pt-[13px] pb-[8px] rounded-lg outline-none text-sideText"
                       required
                     />
                   </div>
@@ -153,7 +153,7 @@ function EditVideoPage({
                     >
                       Загрузка превью
                     </label>
-                    <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#e7e7e7] bg-[#F5F5F5]">
+                    <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#464646] bg-searchText">
                       {!previewFileName && (
                         <div className="absolute pointer">
                           <UploadIcon />
@@ -189,7 +189,7 @@ function EditVideoPage({
                   name="description"
                   value={videoData.description}
                   onChange={handleChange}
-                  className="rounded-lg px-[17px] text-gray-text py-[13px] outline-none bg-[#F5F5F5] h-[126px] flix:h-[176px] w-full"
+                  className="rounded-lg placeholder:text-sideText px-[17px] text-sideText py-[13px] outline-none bg-searchText h-[126px] flix:h-[176px] w-full"
                   placeholder="Введите описание видео"
                   required
                 />

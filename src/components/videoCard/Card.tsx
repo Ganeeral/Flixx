@@ -34,15 +34,15 @@ const Card: React.FC<{ video: Video }> = ({ video }) => {
           </div>
           <div className="video__content flex flex-col gap-y-1 flex-grow">
             <div className="flex flex-col">
-              <h6 className="video__title text-base leading-5 font-bold overflow-ellipsis line-clamp-2">
+              <h6 className="video__title text-titleText text-base leading-5 font-bold overflow-ellipsis line-clamp-2">
                 {video.title}
               </h6>
             </div>
             <div className="flex flex-col">
-              <p className="text-xs leading-5 tracking-[-0.03em] text-nameChannel">
+              <p className="text-xs leading-5 tracking-[-0.03em] text-sideText">
                 {video.author}
               </p>
-              <p className="flex gap-x-1 text-xs leading-5 tracking-[-0.03em] text-nameChannel">
+              <p className="flex gap-x-1 text-xs leading-5 tracking-[-0.03em] text-sideText">
                 <FormatWatch video={video} /> • {" "}
                 {relativeDate}
               </p>

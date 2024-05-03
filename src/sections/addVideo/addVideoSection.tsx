@@ -108,7 +108,7 @@ function AddVideoPage() {
                 <label htmlFor="title" className="text-base text-gray-text">
                   Название
                 </label>
-                <div className="max-w-[270px] mt-[10px] max-h-[45px] h-full w-full rounded-lg bg-[#F5F5F5]">
+                <div className="max-w-[270px] mt-[10px] max-h-[45px] h-full w-full rounded-lg bg-btnActive">
                     <input
                       type="text"
                       id="title"
@@ -126,7 +126,7 @@ function AddVideoPage() {
                   <label htmlFor="preview" className="text-base text-gray-text">
                     Загрузка превью
                   </label>
-                  <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#e7e7e7] bg-[#F5F5F5]">
+                  <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#464646] bg-btnActive">
                     {!previewFileName && (
                       <div className="absolute pointer">
                         <UploadIcon />
@@ -153,7 +153,7 @@ function AddVideoPage() {
                   <label htmlFor="preview" className="text-base text-gray-text">
                     Загрузка видео
                   </label>
-                  <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#e7e7e7]  bg-[#F5F5F5]">
+                  <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#464646] bg-btnActive">
                     {!videoFileName && (
                       <div className="absolute pointer">
                         <UploadIcon />
@@ -187,7 +187,7 @@ function AddVideoPage() {
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                className="rounded-lg px-[17px] text-gray-text py-[13px] outline-none bg-[#F5F5F5] h-[126px] flix:h-[176px] w-full"
+                className="rounded-lg px-[17px] placeholder:text-sideText text-gray-text py-[13px] outline-none bg-btnActive h-[126px] flix:h-[176px] w-full"
                 placeholder="Введите описание видео"
                 required
               />

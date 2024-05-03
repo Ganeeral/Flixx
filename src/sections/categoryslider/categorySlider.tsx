@@ -43,8 +43,8 @@ const Slider: React.FC = () => {
                 <div
                   className={`cursor-pointer px-4 py-2 rounded-[6px] ${
                     selectedCategory === index
-                      ? "bg-[#5C5C5C] text-white"
-                      : "bg-gray-1 text-white hover:bg-gray-2 duration-300"
+                      ? "bg-btnActive text-white"
+                      : "bg-[#535353] text-white hover:bg-[#444444] duration-300"
                   }`}
                   onClick={() => handleCategoryClick(index)}
                 >

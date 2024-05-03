@@ -18,8 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className="background__main">
-        <div className="flex grow">{children}</div>
+      <body className="bg-background">
+        <div className="flex grow h-full">{children}</div>
       </body>
     </html>
   );

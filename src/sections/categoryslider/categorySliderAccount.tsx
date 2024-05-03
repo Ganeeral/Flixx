@@ -43,15 +43,15 @@ const SliderAccount: React.FC = () => {
     <div className="category flex flix:ml-5 mt-[25px]">
       <div className="max-w-[100vw] overflow-hidden">
         <div className="flex items-center justify-between px-4">
-          <div className="flex rounded-[46px] bg-[#F4F4F4] overflow-auto scrollbar-hide relative">
+          <div className="flex rounded-[46px] bg-searchText overflow-auto scrollbar-hide relative">
             {categories.map((category, index) => (
               <div key={index} className="flex-shrink-0">
                 <Link href={category.to}>
                   <div
                     className={`cursor-pointer px-6 py-[17px] ${
                       selectedCategory === index
-                        ? "bg-[#ECECEC] text-black duration-300 rounded-[74px]"
-                        : "bg-[#F4F4F4] text-black hover:rounded-[74px] duration-300"
+                        ? "bg-btnActive text-sideText duration-300 rounded-[74px]"
+                        : "bg-searchText text-sideText hover:rounded-[74px] duration-300"
                     }`}
                     onClick={() => handleCategoryClick(index)}
                   >

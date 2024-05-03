@@ -33,7 +33,7 @@ const AboutWatch: React.FC<ChannelInfoProps> = ({ video }) => {
 
   return (
     <div className={cn("flex w-full flex-col gap-y-3")}>
-      <h3 className="text-xl leading-5 text-searchText text-wrap w-full overflow-hidden">{video?.title}</h3>
+      <h3 className="text-xl leading-5 text-titleText text-wrap w-full overflow-hidden">{video?.title}</h3>
 
       <div
         className={cn(
@@ -53,10 +53,10 @@ const AboutWatch: React.FC<ChannelInfoProps> = ({ video }) => {
           <div className="flex-grow flix:flex-grow-0">
             <div className="flex justify-between gap-y-1 f gap-x-10 flex-grow">
               <div className="flex flex-col">
-                <p className="leading-5 tracking-[-0.03em] text-black">
+                <p className="leading-5 tracking-[-0.03em] text-sideText">
                   {video?.author}
                 </p>
-                <p className="text-xs mobile:text-sm leading-5 tracking-[-0.03em] text-nameChannel">
+                <p className="text-xs mobile:text-sm leading-5 tracking-[-0.03em] text-sideText">
                   <FormatSubs video={video} />
                 </p>
               </div>
@@ -73,11 +73,11 @@ const AboutWatch: React.FC<ChannelInfoProps> = ({ video }) => {
 
       <div
         className={cn(
-          "bg-dscr rounded-xl w-full max-w-[866px] mt-4 p-3",
+          "bg-searchText rounded-xl w-full max-w-[866px] mt-4 p-3",
           "flix:mt-7"
         )}
       >
-        <p className="flex gap-x-1 text-base leading-5 tracking-[-0.03em] text-nameChannel">
+        <p className="flex gap-x-1 text-base leading-5 tracking-[-0.03em] text-titleText">
           <FormatWatch video={video} /> • {relativeDate}
         </p>
 

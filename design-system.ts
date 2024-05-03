@@ -30,9 +30,13 @@ export const indents = {
 };
 
 export const colors = {
+  activeDrop:'#252525c5',
+  background: '#181818',
+  titleText: '#BBBBBB',
   "notFound-text": "#2a2d32",
   authorPreview: "#B3B3B3",
   searchText: "#303030",
+  btnActive: '#3A3A3A',
   nameChannel: "#616161",
   btnBlack: "#272727",
   sideText: "#969696",

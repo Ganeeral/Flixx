@@ -145,7 +145,7 @@ export default function Home() {
                 <BurgerIcon className="cursor-pointer" onClick={showLess} />
               )}
               {!active && (
-                <BurgerIconMobile
+                <BurgerIcon
                   className="cursor-pointer"
                   onClick={showMore}
                 />

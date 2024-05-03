@@ -42,15 +42,15 @@ const CardWatch: React.FC<CardWatchProps> = ({ video, relativeDate }) => {
             "desktop:max-w-[220px]"
           )}
         >
-          <h4 className="text-sm leading-5 line-clamp-2 overflow-hidden">
+          <h4 className="text-sm leading-5 text-titleText">
             {video.title}
           </h4>
 
           <div>
-            <p className="text-sm leading-5 tracking-[-0.03em] text-nameChannel">
+            <p className="text-sm leading-5 tracking-[-0.03em] text-sideText">
               {video.author}
             </p>
-            <p className="flex gap-x-1 text-sm leading-5 tracking-[-0.03em] text-nameChannel">
+            <p className="flex gap-x-1 text-sm leading-5 tracking-[-0.03em] text-sideText">
               <FormatWatch video={video} /> • {relativeDate}
             </p>
           </div>

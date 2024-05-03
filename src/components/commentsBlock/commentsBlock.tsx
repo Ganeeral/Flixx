@@ -16,9 +16,9 @@ const CommentsBlock: React.FC<ChannelInfoProps> = ({ video }) => {
 
   return (
     <div className="flex flex-col gap-y-2">
-      <form>
-        <h5 className="leading-5 tracking-[-0.03em]">1293 комментария</h5>
-        <div className="flex gap-x-3 items-center">
+      <form method="POST" enctype="multipart/form-data">
+        <h5 className="leading-5 text-white tracking-[-0.03em]">1293 комментария</h5>
+        <div className="flex gap-x-3 items-center mt-5">
           <div className="h-10 w-10 rounded-full relative">
             <Image
               src={video.author_avatar}
@@ -29,7 +29,7 @@ const CommentsBlock: React.FC<ChannelInfoProps> = ({ video }) => {
           </div>
           <div className="relative w-full">
             <input
-              className="outline-none text-nameChannel w-full"
+              className="outline-none text-sideText w-full bg-inherit"
               type="text"
               placeholder="Введите комментарий"
               onFocus={() => setIsInputFocused(true)}
@@ -69,11 +69,11 @@ const CommentsBlock: React.FC<ChannelInfoProps> = ({ video }) => {
 
           <div className="flex flex-col">
             <div className="flex gap-x-1 items-center">
-              <p className="text-nameChannel text-xs">@{video.author}</p>
-              <p className="text-searchText text-[10px]">2 дня назад</p>
+              <p className="text-titleText text-xs">@{video.author}</p>
+              <p className="text-sideText text-[10px]">2 дня назад</p>
             </div>
 
-            <p className="text-xs text-nameChannel"> Lorem ipsum Dollar</p>
+            <p className="text-xs text-sideText"> Lorem ipsum Dollar</p>
           </div>
         </div>
         <div className="flex gap-x-3 items-center">
@@ -88,11 +88,11 @@ const CommentsBlock: React.FC<ChannelInfoProps> = ({ video }) => {
 
           <div className="flex flex-col">
             <div className="flex gap-x-1 items-center">
-              <p className="text-nameChannel text-xs">@{video.author}</p>
-              <p className="text-searchText text-[10px]">2 дня назад</p>
+              <p className="text-titleText text-xs">@{video.author}</p>
+              <p className="text-sideText text-[10px]">2 дня назад</p>
             </div>
 
-            <p className="text-xs text-nameChannel"> Lorem ipsum Dollar</p>
+            <p className="text-xs text-sideText"> Lorem ipsum Dollar</p>
           </div>
         </div>
         <div className="flex gap-x-3 items-center">
@@ -107,13 +107,14 @@ const CommentsBlock: React.FC<ChannelInfoProps> = ({ video }) => {
 
           <div className="flex flex-col">
             <div className="flex gap-x-1 items-center">
-              <p className="text-nameChannel text-xs">@{video.author}</p>
-              <p className="text-searchText text-[10px]">2 дня назад</p>
+              <p className="text-titleText text-xs">@{video.author}</p>
+              <p className="text-sideText text-[10px]">2 дня назад</p>
             </div>
 
-            <p className="text-xs text-nameChannel"> Lorem ipsum Dollar</p>
+            <p className="text-xs text-sideText"> Lorem ipsum Dollar</p>
           </div>
         </div>
+      
       </div>
     </div>
   );

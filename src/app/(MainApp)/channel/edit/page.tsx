@@ -103,7 +103,7 @@ const EditChannel = () => {
                     <label htmlFor="title" className="text-base text-gray-text">
                       Имя канала
                     </label>
-                    <div className="max-w-[270px] mt-[10px] max-h-[45px] h-full w-full rounded-lg bg-[#F5F5F5]">
+                    <div className="max-w-[270px] mt-[10px] max-h-[45px] h-full w-full rounded-lg bg-searchText">
                       <input
                         type="text"
                         id="title"
@@ -123,7 +123,7 @@ const EditChannel = () => {
                     >
                       Загрузка аватарки
                     </label>
-                    <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#e7e7e7] bg-[#F5F5F5]">
+                    <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[84px] relative h-full w-full rounded-lg duration-300  hover:bg-[#464646] bg-searchText">
                       {!previewFileName && (
                         <div className="absolute pointer">
                           <UploadIcon />
@@ -153,7 +153,7 @@ const EditChannel = () => {
                     >
                       Загрузка баннера
                     </label>
-                    <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[170px] relative h-full w-full rounded-lg duration-300  hover:bg-[#e7e7e7] bg-[#F5F5F5]">
+                    <div className="max-w-[270px] mt-[10px] cursor-pointer flex-col flex justify-center items-center max-h-[170px] relative h-full w-full rounded-lg duration-300  hover:bg-[#464646] bg-searchText">
                       {!previewFileName && (
                         <div className="absolute pointer">
                           <UploadIcon />

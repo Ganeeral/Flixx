@@ -10,12 +10,12 @@ const NotFounds: React.FC = () => {
       <div className="notFound relative">
         <NotFound />
       </div>
-      <div className="bg-[#dadbe2] h-[1px] max-w-[1170px] w-full"></div>
+      <div className="bg-searchText h-[1px] max-w-[1170px] w-full"></div>
       <div className="flex flex-col items-center gap-y-6">
-        <h3 className="text-display-2 mobile:text-display-4 text-notFound-text text-center">
+        <h3 className="text-display-2 mobile:text-display-4 text-white text-center">
           Ой! Страницы не существует
         </h3>
-        <p className="text-gray-text text-center max-w-[576px] w-full">
+        <p className="text-sideText text-center max-w-[576px] w-full">
           К сожалению, запрашиваемая страница не найдена. Возможно, вы ввели
           неправильный адрес или страницы больше не существует. Пожалуйста,
           вернитесь на главную страницу сайта и попробуйте найти нужную

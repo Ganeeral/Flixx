@@ -53,7 +53,9 @@ video:-webkit-full-page-media {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(135.29deg, rgb(50, 49, 50) 0%, rgb(0, 0, 0) 99.335%);
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
   font-family: SF;
 }
 
@@ -151,11 +153,20 @@ body {
 
 .input__container {
   background:
-    linear-gradient(#ffffff 0 0) padding-box,
-    linear-gradient(to right, rgb(231, 62, 110), rgb(119, 41, 117)) border-box;
+    linear-gradient(#252525 0 0) padding-box,
+    linear-gradient(to right, rgba(231, 62, 110, 0.5), rgba(119, 41, 117, 0.5)) border-box;
   color: #313149;
   border: 2px solid transparent;
   border-radius: 12px;
+}
+
+input::placeholder {
+  color: #969696;
+}
+
+.blurBg {
+  backdrop-filter: blur(45px);
+  background: rgba(54, 53, 53, 0.32);
 }
 
 .textGradient {
@@ -204,18 +215,14 @@ body {
   border-radius: 0 8px 8px 0;
 }
 
-.bg-dscr {
-  background: rgb(242, 242, 242);
-}
-
-.text-nameChannel {
+.text-titleText {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
   -webkit-line-clamp: 2;
 }
 
-.text-nameChannel.expanded {
+.text-titleText.expanded {
   -webkit-line-clamp: unset;
 }
 
@@ -224,8 +231,6 @@ body {
   margin: 0 auto;
 }
 
-
-
 .input-line {
   position: absolute;
   bottom: 0;
@@ -233,7 +238,7 @@ body {
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background-color: #303030;
+  background-color: #c5c5c5;
   transition: width 0.3s ease, background-color 0.3s ease;
 }
 
@@ -257,6 +262,10 @@ body {
   max-height: 157px;
   width: 100%;
   height: 100%;
+}
+
+.transitionBg {
+  transition: background 0.2s ease;
 }
 
 @media screen and (max-width:400px) {

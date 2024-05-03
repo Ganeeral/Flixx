@@ -9,10 +9,10 @@ const VideoDescription: React.FC<{ description: string }> = ({ description }) =>
 
   return (
     <div>
-      <p className={`text-nameChannel ${expanded ? 'expanded' : ''}`}>
+      <p className={`text-titleText ${expanded ? 'expanded' : ''}`}>
         {description}
       </p>
-      <button onClick={toggleDescription}>
+      <button className='text-white' onClick={toggleDescription}>
         {expanded ? 'скрыть' : '...ещё'}
       </button>
     </div>

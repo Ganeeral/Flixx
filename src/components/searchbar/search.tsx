@@ -51,23 +51,23 @@ const SearchBar = () => {
           <SearchIcon />
         </div>
       ) : (
-        <form className="relative flex w-[400px] flix:mt-[14px] flix:mb-[14px]">
+        <form className="relative flex w-[400px] tablet-s:mt-[14px] tablet-s:mb-[14px]">
           <div className="input__container max-w-[1000px] flex w-full relative">
             <input
               type="search"
               placeholder="Введите запрос.."
               className={cn(
-                "max-w-[380px] w-full p-[12px] bg-inherit text-searchText outline-none"
+                "max-w-[380px] w-full p-[12px] bg-inherit text-sideText outline-none"
               )}
               onChange={handleSearch}
             />
-            <button className="absolute right-[4px] top-1/2 -translate-y-1/2 p-[12px] bg-inherit border-[1px] border-gray-950 rounded-full mobile:p-[10px]">
+            <button className="absolute right-[4px] top-1/2 -translate-y-1/2 p-[12px] bg-inherit border-[1px] input__container  rounded-full mobile:p-[10px]">
               <SearchIcon />
             </button>
           </div>
 
           {activeSearch.length > 0 && (
-            <div className="absolute top-20 p-4 bg-sideText text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col gap-2">
+            <div className="blurBg absolute top-20 p-4 bg-sideText text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col gap-2">
               {activeSearch.map((searchItem, index) => (
                 <span key={index}>{searchItem}</span>
               ))}
@@ -78,11 +78,11 @@ const SearchBar = () => {
 
       {isFullSearch && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center blurBg  bg-opacity-50"
           onClick={closeFullSearch}
         >
           <form
-            className=" relative bg-white rounded-xl p-4"
+            className=" relative bg-inherit rounded-xl p-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="input__container relative">

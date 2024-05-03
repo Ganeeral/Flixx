@@ -10,7 +10,7 @@ export default function WatchLayout({
   return (
     <>
       <HeaderWatch />
-      <div className="mt-[66px] flix:mt-[80px] flex-grow">{children}</div>
+      <div className="mt-[66px] flix:mt-[80px]">{children}</div>
     </>
   
   );
