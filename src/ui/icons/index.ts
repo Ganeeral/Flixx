@@ -30,6 +30,8 @@ import ShareIcon from "@/ui/icons/ShareIcon.svg"
 import NotFound from "@/ui/icons/NotFound.svg";
 import DeleteItemIcon from "@/ui/icons/DeleteItemIcon.svg"
 import TrashHistoryIcon from "@/ui/icons/TrashHistoryIcon.svg"
+import CloseIcon from "@/ui/icons/CloseIcon.svg"
+import HideIcon from "@/ui/icons/HideIcon.svg"
 
 export {
   BurgerIcon,
@@ -64,4 +66,6 @@ export {
   NotFound,
   DeleteItemIcon,
   TrashHistoryIcon,
+  CloseIcon,
+  HideIcon,
 };
