@@ -11,18 +11,54 @@ import Link from "next/link";
 const AuthPage: React.FC = () => {
   const [backgroundImage, setBackgroundImage] = useState<StaticImageData>();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
     const randomImage = getRandomBackgroundImage();
     setBackgroundImage(randomImage);
   }, []);
 
-  const handleLogin = () => {
-    redirect("/");
-  };
-
   const togglePasswordVisibility = () => {
     setPasswordVisible((prevState) => !prevState);
+  };
+
+  const validateUsername = () => {
+    if (!username) {
+      setUsernameError("Введите логин");
+    } else if (!/^[a-zA-Z]+$/.test(username)) {
+      setUsernameError("Логин может содержать только латинские буквы");
+    } else {
+      setUsernameError("");
+    }
+    checkFormValidity();
+  };
+
+  const validatePassword = () => {
+    if (!password) {
+      setPasswordError("Введите пароль");
+    } else if (password.length < 6) {
+      setPasswordError("Пароль должен быть длиннее 6 символов");
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const checkFormValidity = () => {
+    if (!usernameError && !passwordError) {
+      setFormIsValid(true);
+    } else {
+      setFormIsValid(false);
+    }
+  };
+
+  const handleLogin = () => {
+    validateUsername();
+    validatePassword();
+    redirect("/");
   };
 
   return (
@@ -129,9 +165,18 @@ const AuthPage: React.FC = () => {
                   Логин
                 </label>
                 <input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  onBlur={validateUsername}
                   type="text"
-                  className="border divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full"
+                  className={cn(
+                    "border divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
+                    { "border-red-500": usernameError }
+                  )}
                 />
+                {usernameError && (
+                  <p className="text-red-500 text-xs">{usernameError}</p>
+                )}
               </div>
               <div className="flex flex-col gap-y-3 max-w-[528px] w-full">
                 <div className="flex justify-between w-full">
@@ -143,12 +188,28 @@ const AuthPage: React.FC = () => {
                   </div>
                 </div>
                 <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onBlur={validatePassword}
                   type={passwordVisible ? "text" : "password"}
-                  className="border divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full"
+                  className={cn(
+                    "border divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
+                    { "border-red-500": passwordError }
+                  )}
                 />
+                {passwordError && (
+                  <p className="text-red-500 text-xs">{passwordError}</p>
+                )}
               </div>
               <div className="flex flex-col gap-y-4">
-                <button className="w-full text-xl leading-5 rounded-[40px] p-5 bg-blacked text-white duration-300 btn">
+                <button
+                  onClick={handleLogin}
+                  disabled={!formIsValid}
+                  className={cn(
+                    "w-full text-xl leading-5 rounded-[40px] p-5 bg-blacked text-white duration-300 btn",
+                    { "opacity-50 cursor-not-allowed": !formIsValid }
+                  )}
+                >
                   Войти
                 </button>
                 <p className="text-searchText text-xs mobile:text-base text-center">

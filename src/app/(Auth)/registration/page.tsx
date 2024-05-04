@@ -11,20 +11,86 @@ import Link from "next/link";
 const RegistrPage: React.FC = () => {
   const [backgroundImage, setBackgroundImage] = useState<StaticImageData>();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [repeatPasswordError, setRepeatPasswordError] = useState("");
+  const [formIsValid, setFormIsValid] = useState(false);
+  const [usernameExistsError, setUsernameExistsError] = useState("");
 
   useEffect(() => {
     const randomImage = getRandomBackgroundImage();
     setBackgroundImage(randomImage);
   }, []);
 
-  const handleLogin = () => {
-    redirect("/");
+  const handleRegistration = async () => {
+    await validateUsername();
+    validatePassword();
+    validateRepeatPassword();
+  };
+  
+  const validateUsername = async () => {
+    if (!username) {
+      setUsernameError("Введите логин");
+    } else if (!/^[a-zA-Z]+$/.test(username)) {
+      setUsernameError("Логин может содержать только латинские буквы");
+    } else {
+      setUsernameError("");
+    }
+    checkFormValidity();
+  };
+
+  const validatePassword = () => {
+    if (!password) {
+      setPasswordError("Введите пароль");
+    } else if (password.length < 6) {
+      setPasswordError("Пароль должен содержать не менее 6 символов");
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d|\W)/.test(password)) {
+      setPasswordError(
+        "Пароль должен содержать хотя бы одну букву верхнего и нижнего регистра, а также хотя бы одну цифру или специальный символ"
+      );
+    } else {
+      setPasswordError("");
+    }
+    checkFormValidity();
+  };
+
+  const validateRepeatPassword = () => {
+    if (!repeatPassword) {
+      setRepeatPasswordError("Повторите пароль");
+    } else if (repeatPassword !== password) {
+      setRepeatPasswordError("Пароли не совпадают");
+    } else {
+      setRepeatPasswordError("");
+    }
+    checkFormValidity();
+  };
+
+  const checkFormValidity = () => {
+    if (
+      !usernameError &&
+      !passwordError &&
+      !repeatPasswordError &&
+      !usernameExistsError
+    ) {
+      setFormIsValid(true);
+    } else {
+      setFormIsValid(false);
+    }
+  };
+
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (/^[a-zA-Z]*$/.test(value) || value === "") {
+      setUsername(value);
+    }
   };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible((prevState) => !prevState);
   };
-
   return (
     <div
       className="min-h-screen flex items-center justify-center"
@@ -129,9 +195,18 @@ const RegistrPage: React.FC = () => {
                   Придумайте логин
                 </label>
                 <input
+                  value={username}
+                  onChange={handleUsernameChange}
+                  onBlur={validateUsername}
                   type="text"
-                  className="border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full"
+                  className={cn(
+                    "border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
+                    { "border-red-500": usernameError }
+                  )}
                 />
+                {usernameError && (
+                  <p className="text-red-500 text-xs">{usernameError}</p>
+                )}
               </div>
               <div className="flex flex-col gap-y-3 max-w-[528px] w-full">
                 <div className="flex justify-between w-full">
@@ -144,8 +219,16 @@ const RegistrPage: React.FC = () => {
                 </div>
                 <input
                   type={passwordVisible ? "text" : "password"}
-                  className="border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className={cn(
+                    "border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
+                    { "border-red-500": passwordError }
+                  )}
                 />
+                {passwordError && (
+                  <p className="text-red-500 text-xs">{passwordError}</p>
+                )}
               </div>
               <div className="flex flex-col gap-y-3 max-w-[528px] w-full">
                 <div className="flex justify-between w-full">
@@ -158,11 +241,28 @@ const RegistrPage: React.FC = () => {
                 </div>
                 <input
                   type={passwordVisible ? "text" : "password"}
-                  className="border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full"
+                  value={repeatPassword}
+                  onChange={(e) => setRepeatPassword(e.target.value)}
+                  onBlur={validateRepeatPassword}
+                  className={cn(
+                    "border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
+                    { "border-red-500": repeatPasswordError }
+                  )}
                 />
+                {repeatPasswordError && (
+                  <p className="text-red-500 text-xs">{repeatPasswordError}</p>
+                )}
               </div>
               <div className="flex flex-col gap-y-4">
-                <button className="w-full text-xl leading-5 rounded-[40px] p-5 bg-blacked text-white duration-300 hover:bg-searchText">
+                <button
+                  type="submit"
+                  className={cn(
+                    "w-full text-xl leading-5 rounded-[40px] p-5 bg-blacked text-white duration-300 hover:bg-searchText",
+                    { "opacity-50 cursor-not-allowed": !formIsValid }
+                  )}
+                  onClick={handleRegistration}
+                  disabled={!formIsValid}
+                >
                   Зарегистрироваться
                 </button>
                 <p className="text-searchText text-xs mobile:text-base text-center">
