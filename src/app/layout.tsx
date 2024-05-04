@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Видеохостинг - Flix",
-  description: "Сайт Flix - ваш источник для стриминга видео онлайн.",
+  description: "Сайт Flix - ваш источник для стриминга видео.",
   icons: {
     icon: {
       url: "../faviconWhite.svg",

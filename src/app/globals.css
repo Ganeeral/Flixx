@@ -176,6 +176,11 @@ input::placeholder {
   background: rgba(54, 53, 53, 0.32);
 }
 
+.btn:hover{
+  backdrop-filter: blur(10px);
+  background: rgba(54, 53, 53, 0.32);
+}
+
 .textGradient {
   background: linear-gradient(2deg, rgb(230, 62, 110), rgb(114, 41, 117));
   -webkit-background-clip: text;
