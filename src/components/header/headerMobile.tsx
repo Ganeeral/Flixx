@@ -24,7 +24,7 @@ const HeaderMobile = () => {
   }, [prevScrollY]);
 
   const headerStyle = {
-    transform: isScrolledDown ? "translateY(-100%)" : "translateY(0)",
+    transform: isScrolledDown ? "translateY(-100%)" : "",
     transition: "transform 0.5s ease",
   };
 

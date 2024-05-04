@@ -92,7 +92,7 @@ const SearchBar = () => {
                 className="max-w-[380px] w-full p-[12px] rounded-[30px] bg-inherit text-searchText outline-none"
                 onChange={handleSearch}
               />
-              <button className="absolute right-[4px] top-1/2 -translate-y-1/2 p-[12px] bg-inherit border-[1px] border-gray-950 rounded-full  mobile:p-[10px]">
+              <button className="input__container absolute right-[4px] top-1/2 -translate-y-1/2 p-[12px] bg-inherit border-[1px] border-gray-950 rounded-full  mobile:p-[10px]">
                 <SearchIcon />
               </button>
             </div>
