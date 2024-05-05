@@ -32,6 +32,15 @@ import DeleteItemIcon from "@/ui/icons/DeleteItemIcon.svg"
 import TrashHistoryIcon from "@/ui/icons/TrashHistoryIcon.svg"
 import CloseIcon from "@/ui/icons/CloseIcon.svg"
 import HideIcon from "@/ui/icons/HideIcon.svg"
+import NotificationIcon from "@/ui/icons/NotificationIcon.svg"
+import HomeAdminIcon from "@/ui/icons/HomeAdminIcon.svg"
+import LogoutAdminIcon from "@/ui/icons/LogoutAdminIcon.svg"
+import SettingsAdminIcon from "@/ui/icons/SettingsAdminIcon.svg"
+import VideoAdminIcon from "@/ui/icons/VideoAdminIcon.svg"
+import UserAdminIcon from "@/ui/icons/UserAdminIcon.svg"
+import VideoTestIcon from "@/ui/icons/VideoTest.svg"
+import IllustarionIcon from "@/ui/icons/Illustration.svg"
+import SearchAdminIcon from "@/ui/icons/SearchAdminIcon.svg"
 
 export {
   BurgerIcon,
@@ -68,4 +77,13 @@ export {
   TrashHistoryIcon,
   CloseIcon,
   HideIcon,
+  NotificationIcon,
+  HomeAdminIcon,
+  LogoutAdminIcon,
+  SettingsAdminIcon,
+  VideoAdminIcon,
+  UserAdminIcon,
+  VideoTestIcon,
+  IllustarionIcon,
+  SearchAdminIcon,
 };

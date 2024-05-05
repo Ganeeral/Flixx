@@ -2,10 +2,12 @@ export const screens = {
   bd: "2400px",
   desktop: "1700px",
   laptop: "1490px",
+  "md-tablet": "1300px",
   tablet: "1100px",
   "tablet-s": "790px",
   flix: "700px",
   mobile: "577px",
+  "md-mobile": "382px",
   "sm-mobile": "335px",
 };
 
@@ -30,15 +32,17 @@ export const indents = {
 };
 
 export const colors = {
-  blacked:'#111111',
-  hoveredCard:'#414141',
-  activeDrop:'#252525c5',
-  background: '#181818',
-  titleText: '#BBBBBB',
+  lightGray:'#F5F5F7',
+  blackSide: "#0C0B0B",
+  blacked: "#111111",
+  hoveredCard: "#414141",
+  activeDrop: "#252525c5",
+  background: "#181818",
+  titleText: "#BBBBBB",
   "notFound-text": "#2a2d32",
   authorPreview: "#B3B3B3",
   searchText: "#303030",
-  btnActive: '#3A3A3A',
+  btnActive: "#3A3A3A",
   nameChannel: "#616161",
   btnBlack: "#272727",
   sideText: "#969696",
