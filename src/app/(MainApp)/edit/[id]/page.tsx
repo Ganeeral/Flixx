@@ -161,7 +161,9 @@ function EditVideoPage({
                       )}
                       {typeof videoData.preview === "object" && (
                         <div className="absolute pointer">
-                          {videoData.preview.name}
+                          <span className="text-sideText text-center line-clamp-1 overflow-hidden w-[230px]">
+                            {videoData.preview.name}
+                          </span>
                         </div>
                       )}
                       <input

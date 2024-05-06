@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { CloseIcon, HideIcon } from "@/ui/icons";
 import cn from "classnames";
 import Link from "next/link";
+import "@/app/globals.css";
 
 const AuthPage: React.FC = () => {
   const [backgroundImage, setBackgroundImage] = useState<StaticImageData>();

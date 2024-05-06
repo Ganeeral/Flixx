@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { UploadIcon } from "@/ui/icons/index";
 
-
 interface FormData {
   title: string;
   description: string;
@@ -22,7 +21,6 @@ function AddVideoPage() {
   const [previewFileName, setPreviewFileName] = useState("");
   const [videoFileName, setVideoFileName] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -109,17 +107,17 @@ function AddVideoPage() {
                   Название
                 </label>
                 <div className="max-w-[270px] mt-[10px] max-h-[45px] h-full w-full rounded-lg bg-btnActive">
-                    <input
-                      type="text"
-                      id="title"
-                      name="title"
-                      placeholder="Введите название видео"
-                      value={formData.title}
-                      onChange={handleChange}
-                      className="bg-inherit w-full pl-[14px] pr-[15px] pt-[13px] pb-[8px] rounded-lg outline-none text-[#8A8A8A]"
-                      required
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Введите название видео"
+                    value={formData.title}
+                    onChange={handleChange}
+                    className="bg-inherit w-full pl-[14px] pr-[15px] pt-[13px] pb-[8px] rounded-lg outline-none text-[#8A8A8A]"
+                    required
+                  />
+                </div>
               </div>
               <div className="flex gap-x-4">
                 <div className="mb-4">
@@ -134,7 +132,9 @@ function AddVideoPage() {
                     )}
                     {typeof formData.preview === "object" && (
                       <div className="absolute pointer">
-                        {formData.preview.name}
+                        <span className="text-sideText text-center line-clamp-1 overflow-hidden w-[230px]">
+                          {formData.preview.name}
+                        </span>
                       </div>
                     )}
                     <input
@@ -161,7 +161,9 @@ function AddVideoPage() {
                     )}
                     {typeof formData.video === "object" && (
                       <div className="absolute pointer">
-                        {formData.video.name}
+                        <span className="text-sideText text-center line-clamp-1 overflow-hidden w-[230px]">
+                          {formData.video.name}
+                        </span>
                       </div>
                     )}
                     <input

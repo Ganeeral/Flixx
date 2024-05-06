@@ -55,7 +55,7 @@ const EditChannel = () => {
       const formDataToSend = new FormData();
       formDataToSend.append("id", UserData.id);
       formDataToSend.append("title", UserData.username);
-      formDataToSend.append("description", UserData.author_avatar);
+      formDataToSend.append("avatar", UserData.author_avatar);
       formDataToSend.append("preview", UserData.banner);
 
       const response = await fetch("http://flixx/src/api/editVideo.php", {
@@ -131,7 +131,9 @@ const EditChannel = () => {
                       )}
                       {typeof UserData.banner === "object" && (
                         <div className="absolute pointer">
-                          {UserData.banner.name}
+                          <span className="text-sideText text-center line-clamp-1 overflow-hidden w-[230px]">
+                            {UserData.banner.name}
+                          </span>
                         </div>
                       )}
                       <input
@@ -161,7 +163,9 @@ const EditChannel = () => {
                       )}
                       {typeof UserData.banner === "object" && (
                         <div className="absolute pointer">
-                          {UserData.banner.name}
+                          <span className="text-sideText text-center line-clamp-1 overflow-hidden w-[230px]">
+                            {UserData.author_avatar}
+                          </span>
                         </div>
                       )}
                       <input
@@ -175,6 +179,14 @@ const EditChannel = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="addBtn text-white px-6 outline-none py-3 rounded-xl"
+                >
+                  Добавить
+                </button>
               </div>
             </form>
           </div>

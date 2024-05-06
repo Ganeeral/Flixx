@@ -186,7 +186,7 @@ input::placeholder {
   background: rgba(133, 133, 133, 0.32);
 }
 
-.blurHover:hover{
+.blurHover:hover {
   background: rgba(196, 196, 196, 0.32);
   backdrop-filter: blur(4px);
 }
@@ -224,6 +224,7 @@ input::placeholder {
 .duration {
   transition: .2s ease;
 }
+
 
 .hover:hover {
   background: #00000015;
@@ -316,6 +317,7 @@ input::placeholder {
 .clamp-title {
   font-size: clamp(3rem, 10vw, 5rem);
 }
+
 .clamp-text {
   font-size: clamp(1.5rem, 5vw, 2.25rem);
 }

@@ -8,6 +8,7 @@ import {
   SubsIcon,
   VideosIcon,
 } from "@/ui/icons/index";
+import { usePathname } from "next/navigation";
 
 const categories = [
   {
@@ -17,7 +18,7 @@ const categories = [
   },
   {
     title: "Видео",
-    to: "/channel",
+    to: "/",
     icon: <VideosIcon />,
   },
   {
@@ -27,7 +28,7 @@ const categories = [
   },
   {
     title: "Сообщество",
-    to: "/channel",
+    to: "/",
     icon: <CommunityIcon />,
   },
 ];
@@ -39,6 +40,8 @@ const SliderAccount: React.FC = () => {
     setSelectedCategory(index);
   };
 
+  const pathname = usePathname();
+
   return (
     <div className="category flex flix:ml-5 mt-[25px]">
       <div className="max-w-[100vw] overflow-hidden">
@@ -49,7 +52,7 @@ const SliderAccount: React.FC = () => {
                 <Link href={category.to}>
                   <div
                     className={`cursor-pointer px-6 py-[17px] ${
-                      selectedCategory === index
+                      pathname === category.to
                         ? "bg-btnActive text-sideText duration-300 rounded-[74px]"
                         : "bg-searchText text-sideText hover:rounded-[74px] duration-300"
                     }`}
