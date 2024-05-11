@@ -6,6 +6,10 @@
   font-family: SF;
   src: url("../ui/fonts/SFProText-Semibold.ttf") format('truetype');
 }
+@font-face {
+  font-family: SFlight;
+  src: url("../ui/fonts/SFProText-Light.ttf") format('truetype');
+}
 
 @font-face {
   font-family: SFDisplay;
@@ -330,9 +334,13 @@ input::placeholder {
   width: clamp(50vw, 10vw, 100vw);
 }
 
+.clampSpanAboutContainer{
+  font-size: clamp(3.5rem, 10vw, 7rem);
+}
+
 .width__header{
   width: calc(100% - 40px);
-  margin: 0 auto 20px;
+  margin: 20px auto 20px;
 }
 
 .backdrop{
@@ -342,6 +350,10 @@ input::placeholder {
 .stickyHeader{
   position: -webkit-sticky;
   position: sticky;
+}
+
+.sftext{
+  font-family: SFlight;
 }
 
 @media screen and (max-width:400px) {

@@ -34,7 +34,7 @@ export const SidebarAbout = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed left-0 shadow-4xl right-0 top-[7.5rem] p-5 z-50 blurBgAbout border-b border-b-white/20"
+            className="fixed left-0 shadow-4xl right-0 top-[8.5rem] p-5 z-50 blurBgAbout border-b border-b-white/20"
           >
             <ul className="grid gap-2">
               {data.map((item) => {
@@ -75,7 +75,7 @@ export const SidebarAbout = () => {
                 className="w-full mt-4 flex justify-center"
               >
                 <button className="w-full gradientBtn py-4 px-10 rounded-[50px] text-white">
-                  Попробовать
+                  Попробовать Flix
                 </button>
               </motion.li>
             </ul>

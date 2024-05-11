@@ -20,7 +20,7 @@ const data = [
 
 const HeaderAbout = () => {
   return (
-    <header className="flex justify-center items-center top-4 w-full z-[999] width__header backdrop-blur-2xl stickyHeader">
+    <header className="flex justify-center items-center top-4 w-full z-[99] width__header stickyHeader">
       <div className="flex items-center gap-x-4 px-10 py-4 bg-lightHeader max-w-[695px] w-full rounded-[100px]">
         <div className="flex mobile:justify-between w-full items-center">
           <Link href="/about">
