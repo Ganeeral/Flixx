@@ -1,30 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import HeaderAbout from "@/components/header/headerAbout";
+import BannerAbout from "@/sections/BannerAbout/BannerAbout";
+import AboutCompany from "@/sections/AboutCompany/AboutCompany";
 
 const Page = () => {
   return (
-    <div className="bg-backgroundAbout flex-grow h-full">
+    <div className="bg-backgroundAbout h-full">
       <HeaderAbout />
-      <div className="flex h-full justify-center bg-backgroundAbout  absolute overflow-hidden flix:overflow-visible w-full">
-        <video
-          autoPlay
-          playsInline
-          muted
-          loop
-          width="100%"
-          height="100%"
-          className="absolute max-w-[700px] scale-150 flix:scale-100 mt-6 flix:mt-0"
-        >
-          <source src="/video/videobg.webm" type="video/webm" />
-        </video>
+      <BannerAbout />
+      <AboutCompany />
+      <div className="mx-auto max-w-[1200px] mt-20">
+        <div className="flex flex-col gap-y-12 mx-6">
+          <div className="flex flex-col justify-start">
+            <h3 className="sftext clamp-title text-lightGray">
+              Миссия платформы
+            </h3>
 
-        <div className="flex translate-y-32 flex-col z-20">
-          <span className="text-white sftext clampSpanAboutContainer">Сохраняем</span>
-          <span className="text-white sftext clampSpanAboutContainer ml-64"> каждый</span>
-          <span className="text-white sftext clampSpanAboutContainer">миг</span>
+            <div className="px-12 py-6 bg-background rounded-[100wmin]">
+
+            </div>
+          </div>
         </div>
       </div>
     </div>

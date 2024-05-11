@@ -41,6 +41,12 @@ import UserAdminIcon from "@/ui/icons/UserAdminIcon.svg"
 import VideoTestIcon from "@/ui/icons/VideoTest.svg"
 import IllustarionIcon from "@/ui/icons/Illustration.svg"
 import SearchAdminIcon from "@/ui/icons/SearchAdminIcon.svg"
+import GoogleIcon from "@/ui/icons/GoogleIcon.svg"
+import CardioIcon from "@/ui/icons/CardioIcon.svg"
+import LoftIcon from "@/ui/icons/LoftIcon.svg"
+import MiroIcon from "@/ui/icons/MiroIcon.svg"
+import SaisonIcon from "@/ui/icons/SaisonIcon.svg"
+import SquadsIcon from "@/ui/icons/SquadsIcon.svg"
 
 export {
   BurgerIcon,
@@ -86,4 +92,10 @@ export {
   VideoTestIcon,
   IllustarionIcon,
   SearchAdminIcon,
+  GoogleIcon,
+  CardioIcon,
+  LoftIcon,
+  MiroIcon,
+  SaisonIcon,
+  SquadsIcon
 };

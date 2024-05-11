@@ -4,6 +4,7 @@ export const screens = {
   laptop: "1490px",
   "md-tablet": "1300px",
   tablet: "1100px",
+  "tablet-lg":"900px",
   "tablet-s": "790px",
   flix: "700px",
   mobile: "577px",
