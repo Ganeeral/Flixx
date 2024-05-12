@@ -37,7 +37,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/sidebar/Sidebar.tsx",
-    "src/app/(MainApp)/page.tsx", "src/components/VideoPlayer",
+    "src/app/(MainApp)/page.tsx", "src/components/VideoPlayer", "src/sections/PrivacySection",
   ],
   "exclude": [
     "node_modules"

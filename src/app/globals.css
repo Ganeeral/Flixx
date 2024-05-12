@@ -338,6 +338,20 @@ input::placeholder {
   font-size: calc(10vmin + 2vmax);
 }
 
+.clampTitle{
+  font-size: clamp(1.75rem, 7vw, 6rem);
+  line-height: 112%;
+}
+
+.clampP{
+  font-size: clamp(1rem, 7vw, 2rem);
+  line-height: 120%;
+}
+
+.clampTitlePrivacy{
+  font-size: clamp(1.75rem, 7vw, 3.75rem);
+}
+
 .width__header {
   width: calc(100% - 40px);
   margin: 20px auto 20px;
@@ -364,6 +378,9 @@ input::placeholder {
 
 .textAbout-clamp{
   font-size: clamp(2.375rem, 10vw, 3.75rem);
+}
+.textAboutClamp{
+  font-size: clamp(1.6rem, 7vw, 2.5rem);
 }
 
 .snap-container{
