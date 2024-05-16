@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StaticImageData } from "next/image";
 import { getRandomBackgroundImage } from "@/utils/backgroundImages";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { CloseIcon, HideIcon } from "@/ui/icons";
 import cn from "classnames";
 import Link from "next/link";
@@ -12,7 +14,7 @@ import "@/app/globals.css";
 const RegistrPage: React.FC = () => {
   const [backgroundImage, setBackgroundImage] = useState<StaticImageData>();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const [username, setUsername] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [usernameError, setUsernameError] = useState("");
@@ -20,27 +22,38 @@ const RegistrPage: React.FC = () => {
   const [repeatPasswordError, setRepeatPasswordError] = useState("");
   const [formIsValid, setFormIsValid] = useState(false);
   const [usernameExistsError, setUsernameExistsError] = useState("");
+  const { push } = useRouter();
 
   useEffect(() => {
     const randomImage = getRandomBackgroundImage();
     setBackgroundImage(randomImage);
   }, []);
 
-  const handleRegistration = async () => {
-    await validateUsername();
-    validatePassword();
-    validateRepeatPassword();
-  };
-  
   const validateUsername = async () => {
-    if (!username) {
+    if (!login) {
       setUsernameError("Введите логин");
-    } else if (!/^[a-zA-Z]+$/.test(username)) {
+    } else if (!/^[a-zA-Z]+$/.test(login)) {
       setUsernameError("Логин может содержать только латинские буквы");
     } else {
       setUsernameError("");
+      try {
+        const response = await fetch("http://flixx/src/api/checkUsername.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ login }),
+        });
+        const data = await response.json();
+        if (data.exists) {
+          setUsernameExistsError("Имя пользователя уже существует");
+        } else {
+          setUsernameExistsError("");
+        }
+      } catch (error) {
+        console.error("Username check error:", error);
+      }
     }
-    checkFormValidity();
   };
 
   const validatePassword = () => {
@@ -48,14 +61,9 @@ const RegistrPage: React.FC = () => {
       setPasswordError("Введите пароль");
     } else if (password.length < 6) {
       setPasswordError("Пароль должен содержать не менее 6 символов");
-    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d|\W)/.test(password)) {
-      setPasswordError(
-        "Пароль должен содержать хотя бы одну букву верхнего и нижнего регистра, а также хотя бы одну цифру или специальный символ"
-      );
     } else {
       setPasswordError("");
     }
-    checkFormValidity();
   };
 
   const validateRepeatPassword = () => {
@@ -66,32 +74,87 @@ const RegistrPage: React.FC = () => {
     } else {
       setRepeatPasswordError("");
     }
-    checkFormValidity();
   };
 
-  const checkFormValidity = () => {
+  const checkFormValidity = useCallback(() => {
     if (
       !usernameError &&
       !passwordError &&
       !repeatPasswordError &&
-      !usernameExistsError
+      !usernameExistsError &&
+      login &&
+      password &&
+      repeatPassword
     ) {
       setFormIsValid(true);
     } else {
       setFormIsValid(false);
     }
+  }, [
+    usernameError,
+    passwordError,
+    repeatPasswordError,
+    usernameExistsError,
+    login,
+    password,
+    repeatPassword,
+  ]);
+
+  useEffect(() => {
+    checkFormValidity();
+  }, [checkFormValidity]);
+
+  const handleRegistration = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await validateUsername();
+    validatePassword();
+    validateRepeatPassword();
+
+    if (formIsValid) {
+      try {
+        const response = await fetch("http://flixx/src/api/register.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ login, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          toast.success(
+            "Регистрация завершена! Перенаправление на страницу входа..."
+          );
+          setTimeout(() => {
+            push("/auth");
+          }, 2000);
+        } else {
+          setUsernameExistsError(data.message);
+        }
+      } catch (error) {
+        console.error("Registration error:", error);
+      }
+    }
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (/^[a-zA-Z]*$/.test(value) || value === "") {
-      setUsername(value);
-    }
+    setLogin(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleRepeatPasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRepeatPassword(e.target.value);
   };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible((prevState) => !prevState);
   };
+
   return (
     <div
       className="min-h-screen flex items-center justify-center"
@@ -131,9 +194,9 @@ const RegistrPage: React.FC = () => {
                     width="72"
                     height="72"
                     filterUnits="userSpaceOnUse"
-                    color-interpolation-filters="sRGB"
+                    colorInterpolationFilters="sRGB"
                   >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
                     <feColorMatrix
                       in="SourceAlpha"
                       type="matrix"
@@ -167,8 +230,8 @@ const RegistrPage: React.FC = () => {
                     y2="6.47224"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#F7426D" />
-                    <stop offset="1" stop-color="#732975" />
+                    <stop stopColor="#F7426D" />
+                    <stop offset="1" stopColor="#732975" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -181,11 +244,13 @@ const RegistrPage: React.FC = () => {
           </div>
 
           <form
+            method="post"
             className={cn(
               "px-4 py-4 flex justify-center items-center flex-col border divide-solid rounded-3xl border-black gap-y-12",
               "mobile:px-10 flix:py-8",
               "tablet-s:px-14 tablet-s:py-10"
             )}
+            onSubmit={handleRegistration}
           >
             <label className="text-center text-display-1 mobile:text-display-2 text-searchText">
               Регистрация
@@ -196,22 +261,25 @@ const RegistrPage: React.FC = () => {
                   Придумайте логин
                 </label>
                 <input
-                  value={username}
+                  value={login}
                   onChange={handleUsernameChange}
                   onBlur={validateUsername}
                   type="text"
                   className={cn(
                     "border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
-                    { "border-red-500": usernameError }
+                    { "border-red-500": usernameError || usernameExistsError }
                   )}
                 />
                 {usernameError && (
                   <p className="text-red-500 text-xs">{usernameError}</p>
                 )}
+                {usernameExistsError && (
+                  <p className="text-red-500 text-xs">{usernameExistsError}</p>
+                )}
               </div>
               <div className="flex flex-col gap-y-3 max-w-[528px] w-full">
                 <div className="flex justify-between w-full">
-                  <label className="text-searchText text-lg  leading-5">
+                  <label className="text-searchText text-lg leading-5">
                     Придумайте пароль
                   </label>
                   <div className="cursor-pointer">
@@ -221,7 +289,8 @@ const RegistrPage: React.FC = () => {
                 <input
                   type={passwordVisible ? "text" : "password"}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handlePasswordChange}
+                  onBlur={validatePassword}
                   className={cn(
                     "border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
                     { "border-red-500": passwordError }
@@ -233,7 +302,7 @@ const RegistrPage: React.FC = () => {
               </div>
               <div className="flex flex-col gap-y-3 max-w-[528px] w-full">
                 <div className="flex justify-between w-full">
-                  <label className="text-searchText text-lg  leading-5">
+                  <label className="text-searchText text-lg leading-5">
                     Повторите пароль
                   </label>
                   <div className="cursor-pointer">
@@ -243,7 +312,7 @@ const RegistrPage: React.FC = () => {
                 <input
                   type={passwordVisible ? "text" : "password"}
                   value={repeatPassword}
-                  onChange={(e) => setRepeatPassword(e.target.value)}
+                  onChange={handleRepeatPasswordChange}
                   onBlur={validateRepeatPassword}
                   className={cn(
                     "border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
@@ -261,7 +330,6 @@ const RegistrPage: React.FC = () => {
                     "w-full text-xl leading-5 rounded-[40px] p-5 bg-blacked text-white duration-300 hover:bg-searchText",
                     { "opacity-50 cursor-not-allowed": !formIsValid }
                   )}
-                  onClick={handleRegistration}
                   disabled={!formIsValid}
                 >
                   Зарегистрироваться
@@ -286,6 +354,7 @@ const RegistrPage: React.FC = () => {
           </button>
         </Link>
       </div>
+      <ToastContainer />
     </div>
   );
 };

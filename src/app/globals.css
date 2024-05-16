@@ -338,17 +338,17 @@ input::placeholder {
   font-size: calc(10vmin + 2vmax);
 }
 
-.clampTitle{
+.clampTitle {
   font-size: clamp(1.75rem, 7vw, 6rem);
   line-height: 112%;
 }
 
-.clampP{
+.clampP {
   font-size: clamp(1rem, 7vw, 2rem);
   line-height: 120%;
 }
 
-.clampTitlePrivacy{
+.clampTitlePrivacy {
   font-size: clamp(1.75rem, 7vw, 3.75rem);
 }
 
@@ -371,19 +371,20 @@ input::placeholder {
   font-family: SFlight;
 }
 
-.snap{
+.snap {
   container-type: inline-size;
   container-name: snap-container;
 }
 
-.textAbout-clamp{
+.textAbout-clamp {
   font-size: clamp(2.375rem, 10vw, 3.75rem);
 }
-.textAboutClamp{
+
+.textAboutClamp {
   font-size: clamp(1.6rem, 7vw, 2.5rem);
 }
 
-.snap-container{
+.snap-container {
   margin-inline: -24px;
   padding-inline: 24px;
 
