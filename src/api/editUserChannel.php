@@ -7,7 +7,7 @@ header("Content-Type: application/json");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "db_flix";
+$dbname = "db_flixx";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];

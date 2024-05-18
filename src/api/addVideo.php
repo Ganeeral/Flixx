@@ -4,21 +4,28 @@ header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_flix";
+include('connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $author = "Who is";
+    $user_id = $_POST['user_id'];
     $publication_date = date('Y-m-d');
     $imageDir = "../../public/images/";
     $videoDir = "../../public/video/";
 
+
+    $stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+
+
     if (isset($_FILES['preview']) && isset($_FILES['video'])) {
+        $author = $user['username'];
         $preview_tmp = $_FILES['preview']['tmp_name'];
         $video_tmp = $_FILES['video']['tmp_name'];
 
@@ -27,8 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $video_url = '/video/' . basename($_FILES['video']['name']);
         move_uploaded_file($video_tmp, $videoDir . basename($_FILES['video']['name']));
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
 
         if ($conn->connect_error) {
             die('Ошибка подключения к базе данных: ' . $conn->connect_error);

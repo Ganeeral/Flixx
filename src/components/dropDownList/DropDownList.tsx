@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Dropdown: React.FC = () => {
+  const { push } = useRouter();
+  const handleLogout = () => {
+    localStorage.removeItem("user_id");
+    push("/auth");
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -41,6 +47,7 @@ const Dropdown: React.FC = () => {
             >
               <p className="textGradient">Подписки</p>
             </Link>
+            <a className="cursor-pointer block px-4 py-2 text-sm hover:bg-activeDrop" onClick={handleLogout}> <p className="textGradient">Выйти</p></a>
           </div>
         </div>
       )}

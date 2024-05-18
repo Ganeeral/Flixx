@@ -1,12 +1,13 @@
+"use client"
+
 import HeaderWatch from "@/components/header/headerWatch";
 import "@/app/globals.css";
+import withAuth from '@/hoc/withAuth';
 
 
-export default function WatchLayout({
-  children,
-}: {
+const WatchLayout: React.FC<{
   children: React.ReactNode;
-}) {
+}> = ({ children }) => {
   return (
     <>
       <HeaderWatch />
@@ -15,3 +16,5 @@ export default function WatchLayout({
   
   );
 }
+
+export default withAuth(WatchLayout);

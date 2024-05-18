@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { UploadIcon } from "@/ui/icons/index";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   title: string;
@@ -21,6 +22,14 @@ function AddVideoPage() {
   const [previewFileName, setPreviewFileName] = useState("");
   const [videoFileName, setVideoFileName] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const { push } = useRouter();
+
+  const userId = localStorage.getItem("user_id");
+
+  if (!userId) {
+      alert('Пользователь не авторизован');
+      return;
+  }
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -63,6 +72,7 @@ function AddVideoPage() {
       formDataToSend.append("description", formData.description);
       formDataToSend.append("preview", formData.preview);
       formDataToSend.append("video", formData.video);
+      formDataToSend.append('user_id', userId);
       const response = await fetch("http://Flixx/src/api/addVideo.php", {
         method: "POST",
         body: formDataToSend,
@@ -73,7 +83,7 @@ function AddVideoPage() {
         setShowSuccessMessage(true);
         setTimeout(() => {
           setShowSuccessMessage(false);
-          window.location.reload();
+          push("/channel");
         }, 3000);
       } else {
         console.error(data.error);

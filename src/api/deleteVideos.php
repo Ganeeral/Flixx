@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "db_flix";
+    $dbname = "db_flixx";
 
     $mysqli = new mysqli($servername, $username, $password, $dbname);
     if ($mysqli->connect_error) {

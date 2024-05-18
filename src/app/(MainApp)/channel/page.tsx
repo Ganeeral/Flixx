@@ -7,13 +7,35 @@ import CardChannel from "@/components/videoCard/cardChannel";
 import { Video } from "@/types/video";
 import Link from "next/link";
 
+interface User {
+  login: string;
+  subscribers: number;
+  preview: string;
+  author_avatar: string;
+  username: string;
+}
+
 function Channel() {
+  const [user, setUser] = useState<User | null>(null);
   const [videos, setVideos] = useState<Video[]>([]);
 
-  useEffect(() => {
+useEffect(() => {
     async function fetchVideos() {
+      const userId = localStorage.getItem("user_id");
+      if (!userId) {
+        console.error("Пользователь не авторизован");
+        return;
+      }
+
       try {
-        const response = await fetch("http://Flixx/src/api/getVideos.php");
+        const response = await fetch("http://Flixx/src/api/getUsersVideos.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_id: userId }),
+        });
+
         const data = await response.json();
 
         if (Array.isArray(data) && data.length > 0) {
@@ -26,12 +48,52 @@ function Channel() {
       }
     }
 
+    async function fetchUserDetails() {
+      const userId = localStorage.getItem("user_id");
+      if (!userId) {
+        console.error("Пользователь не авторизован");
+        return;
+      }
+      try {
+        const response = await fetch("http://Flixx/src/api/getUserDetails.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_id: userId }),
+        });
+        const data = await response.json();
+        if (data && !data.message) {
+          setUser(data);
+        } else {
+          console.error("Пользователь не найден");
+        }
+      } catch (error) {
+        console.error("Ошибка получения данных о пользователе:", error);
+      }
+    }
+
     fetchVideos();
+    fetchUserDetails();
   }, []);
 
+
   const updateVideos = async () => {
+    const userId = localStorage.getItem("user_id");
+    if (!userId) {
+      console.error("Пользователь не авторизован");
+      return;
+    }
+
     try {
-      const response = await fetch("http://Flixx/src/api/getVideos.php");
+      const response = await fetch("http://Flixx/src/api/getUsersVideos.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_id: userId }),
+      });
+
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
@@ -46,7 +108,9 @@ function Channel() {
 
   return (
     <>
-      <ChannelPreviewSection />
+      {user && (
+        <ChannelPreviewSection user={user} />
+      )}
       <CategorySliderAccount />
       <div className="textGradient ml-8 mt-[40px] text-2xl">Видео</div>
       <div className="grid grid-cols-1 flix:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-6 m-2 flix:m-8">
@@ -61,4 +125,5 @@ function Channel() {
     </>
   );
 }
+
 export default Channel;

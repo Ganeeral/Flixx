@@ -5,12 +5,11 @@ import AdminGreeting from "@/components/adminGreeting/adminGreeting";
 import HeaderAdmin from "@/components/header/HeaderAdmin";
 import SidebarAdmin from "@/components/sidebar/SidebarAdmin";
 import { useEffect, useState } from "react";
+import withAuth from '@/hoc/withAuth';
 
-export default function AdminLayout({
-  children,
-}: Readonly<{
+const AdminLayout: React.FC<{
   children: React.ReactNode;
-}>) {
+}> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -62,3 +61,5 @@ export default function AdminLayout({
     </div>
   );
 }
+
+export default withAuth(AdminLayout);

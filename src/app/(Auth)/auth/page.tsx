@@ -1,65 +1,101 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StaticImageData } from "next/image";
 import { getRandomBackgroundImage } from "@/utils/backgroundImages";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { CloseIcon, HideIcon } from "@/ui/icons";
 import cn from "classnames";
 import Link from "next/link";
 import "@/app/globals.css";
 
-const AuthPage: React.FC = () => {
+const LoginPage: React.FC = () => {
   const [backgroundImage, setBackgroundImage] = useState<StaticImageData>();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const [username, setUsername] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameError, setUsernameError] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [formIsValid, setFormIsValid] = useState(false);
+  const { push } = useRouter();
 
   useEffect(() => {
     const randomImage = getRandomBackgroundImage();
     setBackgroundImage(randomImage);
   }, []);
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible((prevState) => !prevState);
-  };
-
-  const validateUsername = () => {
-    if (!username) {
-      setUsernameError("Введите логин");
-    } else if (!/^[a-zA-Z]+$/.test(username)) {
-      setUsernameError("Логин может содержать только латинские буквы");
+  const validateLogin = () => {
+    if (!login) {
+      setLoginError("Введите логин");
     } else {
-      setUsernameError("");
+      setLoginError("");
     }
-    checkFormValidity();
   };
 
   const validatePassword = () => {
     if (!password) {
       setPasswordError("Введите пароль");
-    } else if (password.length < 6) {
-      setPasswordError("Пароль должен быть длиннее 6 символов");
     } else {
       setPasswordError("");
     }
   };
 
-  const checkFormValidity = () => {
-    if (!usernameError && !passwordError) {
+  const checkFormValidity = useCallback(() => {
+    if (!loginError && !passwordError && login && password) {
       setFormIsValid(true);
     } else {
       setFormIsValid(false);
     }
+  }, [loginError, passwordError, login, password]);
+
+  useEffect(() => {
+    checkFormValidity();
+  }, [checkFormValidity]);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    validateLogin();
+    validatePassword();
+
+    if (formIsValid) {
+      try {
+        const response = await fetch("http://flixx/src/api/login.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ login, password }),
+        });
+
+        const data = await response.json();
+        if (data.user_id) {
+          localStorage.setItem("user_id", data.user_id);
+          toast.success("Вход выполнен успешно! Перенаправление...");
+          setTimeout(() => {
+            push("/channel");
+          }, 2000);
+        } else {
+          toast.error(data.message);
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        toast.error("Произошла ошибка при входе");
+      }
+    }
   };
 
-  const handleLogin = () => {
-    validateUsername();
-    validatePassword();
-    redirect("/");
+  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLogin(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prevState) => !prevState);
   };
 
   return (
@@ -75,7 +111,7 @@ const AuthPage: React.FC = () => {
           : {}
       }
     >
-      <div className="min-w-[300px] max-w-[670px] w-full flex flex-col gap-y-4 mx-2">
+      <div className="min-w-[300px] my-10 max-w-[670px] w-full flex flex-col gap-y-4 mx-2">
         <div className="rounded-[36px] backgroundAuth p-4 flex flex-col gap-y-8">
           <div className="relative flex justify-center ">
             <Link href="/">
@@ -101,9 +137,9 @@ const AuthPage: React.FC = () => {
                     width="72"
                     height="72"
                     filterUnits="userSpaceOnUse"
-                    color-interpolation-filters="sRGB"
+                    colorInterpolationFilters="sRGB"
                   >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
                     <feColorMatrix
                       in="SourceAlpha"
                       type="matrix"
@@ -137,8 +173,8 @@ const AuthPage: React.FC = () => {
                     y2="6.47224"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#F7426D" />
-                    <stop offset="1" stop-color="#732975" />
+                    <stop stopColor="#F7426D" />
+                    <stop offset="1" stopColor="#732975" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -151,11 +187,13 @@ const AuthPage: React.FC = () => {
           </div>
 
           <form
+            method="post"
             className={cn(
               "px-4 py-4 flex justify-center items-center flex-col border divide-solid rounded-3xl border-black gap-y-12",
               "mobile:px-10 flix:py-8",
               "tablet-s:px-14 tablet-s:py-10"
             )}
+            onSubmit={handleLogin}
           >
             <label className="text-center text-display-1 mobile:text-display-2 text-searchText">
               Войти
@@ -166,17 +204,17 @@ const AuthPage: React.FC = () => {
                   Логин
                 </label>
                 <input
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  onBlur={validateUsername}
+                  value={login}
+                  onChange={handleLoginChange}
+                  onBlur={validateLogin}
                   type="text"
                   className={cn(
-                    "border divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
-                    { "border-red-500": usernameError }
+                    "border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
+                    { "border-red-500": loginError }
                   )}
                 />
-                {usernameError && (
-                  <p className="text-red-500 text-xs">{usernameError}</p>
+                {loginError && (
+                  <p className="text-red-500 text-xs">{loginError}</p>
                 )}
               </div>
               <div className="flex flex-col gap-y-3 max-w-[528px] w-full">
@@ -189,12 +227,12 @@ const AuthPage: React.FC = () => {
                   </div>
                 </div>
                 <input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onBlur={validatePassword}
                   type={passwordVisible ? "text" : "password"}
+                  value={password}
+                  onChange={handlePasswordChange}
+                  onBlur={validatePassword}
                   className={cn(
-                    "border divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
+                    "border placeholder:text-searchText placeholder:text-base divide-solid border-[#666666] bg-inherit h-[56px] rounded-xl outline-none px-2 text-searchText text-xl w-full",
                     { "border-red-500": passwordError }
                   )}
                 />
@@ -202,39 +240,31 @@ const AuthPage: React.FC = () => {
                   <p className="text-red-500 text-xs">{passwordError}</p>
                 )}
               </div>
+              
               <div className="flex flex-col gap-y-4">
                 <button
-                  onClick={handleLogin}
-                  disabled={!formIsValid}
+                  type="submit"
                   className={cn(
-                    "w-full text-xl leading-5 rounded-[40px] p-5 bg-blacked text-white duration-300 btn",
+                    "w-full text-xl leading-5 rounded-[40px] p-5 bg-blacked text-white duration-300 hover:bg-searchText",
                     { "opacity-50 cursor-not-allowed": !formIsValid }
                   )}
+                  disabled={!formIsValid}
                 >
                   Войти
                 </button>
-                <p className="text-searchText text-xs mobile:text-base text-center">
-                  Продолжая, вы соглашаетесь с{" "}
-                  <a
-                    target="_blank"
-                    href="privacy_policy.pdf"
-                    className="text-blacked underline underline-offset-4"
-                  >
-                    Политикой конфиденциальности.
-                  </a>
-                </p>
               </div>
             </div>
           </form>
         </div>
         <Link href="/registration">
-          <button className="w-full text-xl leading-5 rounded-[40px] p-5 bg-blacked text-white">
-            Создать аккаунт
+          <button className="w-full text-xl leading-5 rounded-[40px] p-5 bg-blacked text-white duration-300 btn">
+            Зарегистрироваться
           </button>
         </Link>
       </div>
+      <ToastContainer />
     </div>
   );
 };
 
-export default AuthPage;
+export default LoginPage;
