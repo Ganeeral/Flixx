@@ -4,6 +4,14 @@ interface Video {
   subscribers: number;
 }
 
+interface User {
+  subscribers: number;
+}
+
+interface Subscription {
+  subscribers: any;
+}
+
 const formatSubscribers = (subscribers: number): string => {
   if (isNaN(subscribers) || subscribers === undefined) {
     return "";
@@ -19,18 +27,16 @@ const formatSubscribers = (subscribers: number): string => {
 };
 
 interface ChannelInfoProps {
-  video: Video;
+  video?: Video | null; 
+  user?: User | null;
+  subscription?: Subscription | null;
 }
 
-const FormatSubs: React.FC<ChannelInfoProps> = ({ video }) => {
-  const formattedSubscribers = formatSubscribers(video.subscribers);
+const FormatSubs: React.FC<ChannelInfoProps> = ({ video, user, subscription }) => {
+  const subscribers = video?.subscribers ?? user?.subscribers ?? subscription?.subscribers;
+  const formattedSubscribers = subscribers !== undefined ? formatSubscribers(subscribers) : "Нет подписчиков";
 
-  return (
-    <>
-      {formattedSubscribers}
-    </>
-    
-  );
+  return <>{formattedSubscribers}</>;
 };
 
 export default FormatSubs;

@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import { Kolok } from "@/ui/icons/index";
+import FormatSubs from "@/components/format/formatSubs";
+import SubscribeButton from "@/ui/buttons/SubscribeButton";
+import { Video } from "@/types/video";
 
 interface ChannelPreviewSectionProps {
   user: {
@@ -10,9 +12,19 @@ interface ChannelPreviewSectionProps {
     author_avatar: string;
     username: string;
   };
+  video: Video | null;
+  currentUserId: number | null;
+  channelId: number;
+  isOwner: boolean;
 }
 
-const ChannelPreviewSection: React.FC<ChannelPreviewSectionProps> = ({ user }) => {
+const ChannelPreviewSection: React.FC<ChannelPreviewSectionProps> = ({
+  user,
+  video,
+  currentUserId,
+  channelId,
+  isOwner,
+}) => {
   return (
     <>
       <div className="max-h-[352px] px-2 min-h-[192px] w-full h-full relative">
@@ -37,17 +49,20 @@ const ChannelPreviewSection: React.FC<ChannelPreviewSectionProps> = ({ user }) =
                   />
                 </div>
                 <div>
-                  <p className="text-white text-sm flix:text-xl leading-5">{user.username}</p>
-                  <p className="text-authorPreview text-[0.75rem] flix:text-sm leading-5">@{user.login}</p>
-                  <p className="text-authorPreview text-[0.75rem] flix:text-sm leading-5">{user.subscribers} подписчиков</p>
+                  <p className="text-white text-sm flix:text-xl leading-5">
+                    {user.username}
+                  </p>
+                  <p className="text-authorPreview text-[0.75rem] flix:text-sm leading-5">
+                    @{user.login}
+                  </p>
+                  <p className="text-authorPreview text-[0.75rem] flix:text-sm leading-5">
+                    <FormatSubs video={video} user={user} />
+                  </p>
                 </div>
               </div>
-              <div className="author__sub cursor-pointer justify-center flex gap-x-[15px] py-[13px] px-[20px] flix:px-[35px] rounded-[20px]">
-                <Kolok />
-                <div className="hidden flix:block">
-                  <p className="text-xs text-white">Подписаться</p>
-                </div>
-              </div>
+              {!isOwner && (
+                <SubscribeButton subscriberId={currentUserId!} channelId={channelId} isOwner={isOwner} />
+              )}
             </div>
           </div>
         </div>

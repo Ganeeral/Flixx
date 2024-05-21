@@ -6,18 +6,13 @@ import CategorySliderAccount from "@/sections/categoryslider/categorySliderAccou
 import CardChannel from "@/components/videoCard/cardChannel";
 import { Video } from "@/types/video";
 import Link from "next/link";
-
-interface User {
-  login: string;
-  subscribers: number;
-  preview: string;
-  author_avatar: string;
-  username: string;
-}
+import { User } from "@/types/user";
+import ChannelPreview from "@/sections/channelPreview/channelPreview";
 
 function Channel() {
   const [user, setUser] = useState<User | null>(null);
   const [videos, setVideos] = useState<Video[]>([]);
+  const [video, setVideo] = useState<Video | null>(null);
 
 useEffect(() => {
     async function fetchVideos() {
@@ -109,7 +104,7 @@ useEffect(() => {
   return (
     <>
       {user && (
-        <ChannelPreviewSection user={user} />
+        <ChannelPreview user={user} video={video}/>
       )}
       <CategorySliderAccount />
       <div className="textGradient ml-8 mt-[40px] text-2xl">Видео</div>

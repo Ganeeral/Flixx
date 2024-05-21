@@ -75,13 +75,12 @@ const LoginPage: React.FC = () => {
           toast.success("Вход выполнен успешно! Перенаправление...");
           setTimeout(() => {
             push("/channel");
-          }, 2000);
+          }, 1000);
         } else {
           toast.error(data.message);
         }
       } catch (error) {
         console.error("Login error:", error);
-        toast.error("Произошла ошибка при входе");
       }
     }
   };
@@ -240,7 +239,7 @@ const LoginPage: React.FC = () => {
                   <p className="text-red-500 text-xs">{passwordError}</p>
                 )}
               </div>
-              
+
               <div className="flex flex-col gap-y-4">
                 <button
                   type="submit"
@@ -262,7 +261,18 @@ const LoginPage: React.FC = () => {
           </button>
         </Link>
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

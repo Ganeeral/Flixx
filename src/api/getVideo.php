@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
         SELECT 
             Videos.*, 
             Users.id AS author_id, 
-            Users.username AS author_username, 
+            Users.username AS author, 
             Users.author_avatar AS author_avatar,
             Users.subscribers AS subscribers
         FROM Videos 
-        LEFT JOIN Users ON Videos.author = Users.username 
+        LEFT JOIN Users ON Videos.author = Users.id 
         WHERE Videos.id = $id
     ";
     $result = $mysqli->query($query);

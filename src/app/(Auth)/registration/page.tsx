@@ -117,7 +117,7 @@ const RegistrPage: React.FC = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ login, password }),
+          body: JSON.stringify({ login, password, repeatPassword }),
         });
 
         const data = await response.json();
@@ -127,7 +127,7 @@ const RegistrPage: React.FC = () => {
           );
           setTimeout(() => {
             push("/auth");
-          }, 2000);
+          }, 0);
         } else {
           setUsernameExistsError(data.message);
         }
@@ -354,7 +354,18 @@ const RegistrPage: React.FC = () => {
           </button>
         </Link>
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

@@ -32,43 +32,68 @@ const Watch = ({
   };
 }) => {
   const [video, setVideo] = useState<Video | null>(null);
-  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [user, setUser] = useState<any | null>(null);
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const response = await axios.get(
-          `http://flixx/src/api/getVideo.php?id=${params.id}`
-        );
+        const response = await axios.get(`http://flixx/src/api/getVideo.php?id=${params.id}`);
         setVideo(response.data);
+
+        const userResponse = await axios.post("http://flixx/src/api/getUserDetails.php", {
+          user_id: response.data.author_id,
+        });
+        setUser(userResponse.data);
       } catch (error) {
-        console.error("Ошибка при извлечении видео:", error);
+        console.error("Ошибка при извлечении видео или пользователя:", error);
       }
     };
 
     fetchVideo();
+
+    const fetchCurrentUser = async () => {
+      const userId = localStorage.getItem("user_id");
+      if (userId) {
+        setCurrentUserId(parseInt(userId, 10));
+      }
+    };
+
+    fetchCurrentUser();
   }, [params.id]);
 
-  if (!video) {
+  useEffect(() => {
+    const recordView = async () => {
+      if (currentUserId && video) {
+        try {
+          await axios.post("http://flixx/src/api/updateView.php", {
+            video_id: video.id,
+            user_id: currentUserId,
+          });
+        } catch (error) {
+          console.error("Ошибка при обновлении просмотров:", error);
+        }
+      }
+    };
+
+    recordView();
+  }, [currentUserId, video]);
+
+  if (!video || !user) {
     return <div>Loading...</div>;
   }
 
+  const isOwner = currentUserId === video.author_id;
+
   return (
-    <div
-      className={cn(
-        "flex flex-col mx-2 justify-center",
-        "tablet-s:mx-5",
-        "tablet:gap-x-5",
-        "desktop:flex-row"
-      )}
-    >
+    <div className={cn("flex flex-col mx-2 justify-center", "tablet-s:mx-5", "tablet:gap-x-5", "desktop:flex-row")}>
       <div className={cn("mt-4 flex flex-col gap-y-4", "flix:mt-2")}>
         <MediaPlayer title={video.title} src={video.video_url}>
           <MediaProvider />
           <DefaultVideoLayout icons={defaultLayoutIcons} />
         </MediaPlayer>
 
-        <AboutWatch video={video} />
+        <AboutWatch video={video} currentUserId={currentUserId} channelId={video.author_id} isOwner={isOwner} user={user} />
         <div className="hidden desktop:block">
           <CommentsBlock video={video} />
         </div>

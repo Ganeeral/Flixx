@@ -12,9 +12,9 @@ if ($conn->connect_error) {
     die("Не удалось подключиться: " . $conn->connect_error);
 }
 
-$sql = "SELECT Videos.id, Videos.title, Videos.video_url, Videos.preview, Videos.author, Videos.publication_date, Videos.views, Videos.description, Users.author_avatar 
+$sql = "SELECT Videos.id, Videos.title, Videos.video_url, Videos.preview, Users.username AS author, Videos.publication_date, Videos.views, Videos.description, Users.author_avatar 
         FROM Videos 
-        LEFT JOIN Users ON Videos.author = Users.username";
+        LEFT JOIN Users ON Videos.author = Users.id";
 $result = $conn->query($sql);
 
 if (!$result) {

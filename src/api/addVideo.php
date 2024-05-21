@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $videoDir = "../../public/video/";
 
 
-    $stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
+    $stmt = $conn->prepare("SELECT id FROM users WHERE id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     if (isset($_FILES['preview']) && isset($_FILES['video'])) {
-        $author = $user['username'];
+        $author = $user['id'];
         $preview_tmp = $_FILES['preview']['tmp_name'];
         $video_tmp = $_FILES['video']['tmp_name'];
 

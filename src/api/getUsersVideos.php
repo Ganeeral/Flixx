@@ -21,17 +21,16 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if ($user) {
-    
     $author = $user['username'];
 
-    $stmt = $conn->prepare("SELECT v.id, v.title, v.preview, v.publication_date, v.views, v.author, u.author_avatar 
-    FROM videos v 
-    JOIN users u ON v.author = u.username 
-    WHERE u.id = ?");
-$stmt->bind_param("s", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$videos = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt = $conn->prepare("SELECT v.id, v.title, v.preview, v.publication_date, v.views, u.username, u.author_avatar 
+        FROM videos v 
+        JOIN users u ON v.author = u.id 
+        WHERE u.id = ?");
+    $stmt->bind_param("s", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $videos = $result->fetch_all(MYSQLI_ASSOC);
     
     if ($videos) {
         echo json_encode($videos);
@@ -42,7 +41,6 @@ $videos = $result->fetch_all(MYSQLI_ASSOC);
 } else {
     echo json_encode(["error" => "Пользователь не найден"]);
 }
-
 
 $stmt->close();
 $conn->close();

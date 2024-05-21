@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { UploadIcon } from "@/ui/icons/index";
 import ChannelPreviewSection from "@/sections/channelPreview/channelPreviewSection";
+import { User } from "@/types/user";
+import { Video } from "@/types/video";
+import { useRouter } from "next/navigation";
+import ChannelPreview from "@/sections/channelPreview/channelPreview";
 
 interface VideoData {
   id: string;
@@ -31,6 +35,43 @@ function EditVideoPage({
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [previewFileName, setPreviewFileName] = useState("");
+  const [user, setUser] = useState<User | null>(null);
+  const [video, setVideo] = useState<Video | null>(null);
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const { push } = useRouter();
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null);
+
+  useEffect(() => {
+    async function fetchUserDetails() {
+      const userId = localStorage.getItem("user_id");
+      if (!userId) {
+        console.error("Пользователь не авторизован");
+        return;
+      }
+      try {
+        const response = await fetch(
+          "http://Flixx/src/api/getUserDetails.php",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ user_id: userId }),
+          }
+        );
+        const data = await response.json();
+        if (data && !data.message) {
+          setUser(data);
+        } else {
+          console.error("Пользователь не найден");
+        }
+      } catch (error) {
+        console.error("Ошибка получения данных о пользователе:", error);
+      }
+    }
+
+    fetchUserDetails();
+  }, []);
 
   useEffect(() => {
     const fetchVideoData = async () => {
@@ -51,6 +92,37 @@ function EditVideoPage({
 
     fetchVideoData();
   }, [params.id]);
+
+  useEffect(() => {
+    async function checkAuthorization() {
+      const userId = localStorage.getItem("user_id");
+      if (!userId) {
+        console.error("Пользователь не авторизован");
+        return;
+      }
+      try {
+        const response = await fetch(
+          `http://flixx/src/api/checkVideoOwnership.php?id=${params.id}&user_id=${userId}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ user_id: userId }),
+          }
+        );
+        const data = await response.json();
+        if (!data.authorized) {
+          console.error("Вы не авторизованы для редактирования этого видео");
+          push("/");
+        }
+      } catch (error) {
+        console.error("Ошибка проверки авторизации:", error);
+      }
+    }
+
+    checkAuthorization();
+  }, [params.id, push]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -109,7 +181,7 @@ function EditVideoPage({
 
   return (
     <>
-      <ChannelPreviewSection />
+      {user && <ChannelPreview user={user} video={null} />}
       <div className="m-3">
         <h1 className="textGradient mt-[50px] tablet:ml-[60px] text-2xl font-bold mb-4">
           Редактировать видео

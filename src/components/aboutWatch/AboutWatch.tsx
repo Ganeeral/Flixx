@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import cn from "classnames";
 import FormatSubs from "../format/formatSubs";
 import SubscribeBtn from "@/ui/buttons/SubscribeBtn";
@@ -8,32 +8,38 @@ import ShareBtn from "@/ui/buttons/ShareBtn";
 import FormatWatch from "../format/formatWatch";
 import VideoDescription from "../videoDescription/videoDescription";
 import { formatRelativeDate } from "../format/formatDateMain";
-
-interface Video {
-  id: number;
-  title: string;
-  author: string;
-  views: number;
-  publication_date: string;
-  preview: string;
-  description: string;
-  video_url: string;
-  author_avatar: string;
-  subscribers: number;
-  username: string;
-}
+import Link from "next/link";
+import { Video } from "@/types/video";
 
 interface ChannelInfoProps {
   video: Video | null;
+  currentUserId: number | null;
+  channelId: number;
+  isOwner: boolean;
+  user: {
+    login: string;
+    subscribers: number;
+    preview: string;
+    author_avatar: string;
+    username: string;
+  };
 }
 
-const AboutWatch: React.FC<ChannelInfoProps> = ({ video }) => {
+const AboutWatch: React.FC<ChannelInfoProps> = ({
+  user,
+  video,
+  currentUserId,
+  channelId,
+  isOwner,
+}) => {
   if (!video) return null;
-  const relativeDate = video ? formatRelativeDate(video.publication_date) : "";
+  const relativeDate = formatRelativeDate(video.publication_date);
 
   return (
     <div className={cn("flex w-full flex-col gap-y-3")}>
-      <h3 className="text-xl leading-5 text-titleText text-wrap w-full overflow-hidden">{video?.title}</h3>
+      <h3 className="text-xl leading-5 text-titleText text-wrap w-full overflow-hidden">
+        {video.title}
+      </h3>
 
       <div
         className={cn(
@@ -43,24 +49,32 @@ const AboutWatch: React.FC<ChannelInfoProps> = ({ video }) => {
       >
         <div className="video__footer max-h-[128px] w-full items-center gap-x-4 h-auto flex">
           <div className="h-[53px] w-[53px] rounded-full relative">
-            <Image
-              src={video?.author_avatar || ""}
-              alt=""
-              fill
-              className="rounded-full object-center object-cover"
-            />
+            <Link href={`/channel/${video.author_id}`}>
+              <Image
+                src={video.author_avatar || ""}
+                alt=""
+                fill
+                className="rounded-full object-center object-cover"
+              />
+            </Link>
           </div>
           <div className="flex-grow flix:flex-grow-0">
-            <div className="flex justify-between gap-y-1 f gap-x-10 flex-grow">
+            <div className="flex justify-between gap-y-1 gap-x-10 flex-grow">
               <div className="flex flex-col">
                 <p className="leading-5 tracking-[-0.03em] text-sideText">
-                  {video?.author}
+                  {video.author}
                 </p>
                 <p className="text-xs mobile:text-sm leading-5 tracking-[-0.03em] text-sideText">
                   <FormatSubs video={video} />
                 </p>
               </div>
-              <SubscribeBtn />
+              {!isOwner && (
+                <SubscribeBtn
+                  subscriberId={currentUserId!}
+                  channelId={channelId}
+                  isOwner={isOwner}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -81,7 +95,7 @@ const AboutWatch: React.FC<ChannelInfoProps> = ({ video }) => {
           <FormatWatch video={video} /> • {relativeDate}
         </p>
 
-        {video && <VideoDescription description={video.description} />}
+        <VideoDescription description={video.description} />
       </div>
     </div>
   );

@@ -72,7 +72,7 @@ const Card: React.FC<{ video: Video; updateVideos: () => void }> = ({
                     </div>
                     <div className="flex flex-col">
                       <p className="text-xs leading-5 tracking-[-0.03em] text-sideText">
-                        {video.author}
+                        {video.username}
                       </p>
                       <p className="text-xs leading-5 tracking-[-0.03em] text-sideText">
                         <FormatWatch video={video} /> • {relativeDate}
