@@ -52,6 +52,7 @@ import FacebookIcon from "@/ui/icons/FacebookIcon.svg";
 import LinkedinIcon from "@/ui/icons/LinkedinIcon.svg";
 import YoutubeIcon from "@/ui/icons/YoutubeIcon.svg";
 import InstagramIcon from "@/ui/icons/InstagramIcon.svg";
+import LaterWhiteIcon from "@/ui/icons/LaterWhiteIcon.svg";
 
 export {
   BurgerIcon,
@@ -108,4 +109,5 @@ export {
   LinkedinIcon,
   YoutubeIcon,
   InstagramIcon,
+  LaterWhiteIcon,
 };

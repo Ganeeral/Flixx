@@ -1,36 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import React from "react";
 
-const categories = [
-  {
-    title: "Все",
-    to: "/",
-  },
-  {
-    title: "Видеоигры",
-    to: "/shorts",
-  },
-  {
-    title: "Музыка",
-    to: "/subscriptions",
-  },
-  {
-    title: "Сериалы",
-    to: "/music",
-  },
-  {
-    title: "Триллеры",
-    to: "/music",
-  },
-];
+interface Category {
+  id: number;
+  name: string;
+}
 
-const Slider: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState(0);
+interface CategorySliderProps {
+  categories: Category[];
+  onCategoryChange: (categoryId: number) => void;
+  selectedCategory: number | null;
+}
 
-  const handleCategoryClick = (index: number) => {
-    setSelectedCategory(index);
+const CategorySlider: React.FC<CategorySliderProps> = ({ categories, onCategoryChange, selectedCategory }) => {
+  const handleCategoryClick = (categoryId: number) => {
+    onCategoryChange(categoryId);
   };
 
   return (
@@ -42,13 +27,13 @@ const Slider: React.FC = () => {
               <div key={index} className="flex-shrink-0">
                 <div
                   className={`cursor-pointer px-4 py-2 rounded-[6px] ${
-                    selectedCategory === index
+                    selectedCategory === category.id
                       ? "bg-btnActive text-white"
                       : "bg-[#535353] text-white hover:bg-[#444444] duration-300"
                   }`}
-                  onClick={() => handleCategoryClick(index)}
+                  onClick={() => handleCategoryClick(category.id)}
                 >
-                  <Link href={category.to}>{category.title}</Link>
+                  <span>{category.name}</span>
                 </div>
               </div>
             ))}
@@ -59,4 +44,4 @@ const Slider: React.FC = () => {
   );
 };
 
-export default Slider;
+export default CategorySlider;

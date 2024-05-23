@@ -1,8 +1,8 @@
 import { TrashHistoryIcon } from "@/ui/icons";
 import React from "react";
-import cn from "classnames"
+import cn from "classnames";
 
-const HistoryHead = () => {
+const HistoryHead: React.FC<{ clearHistory: () => void }> = ({ clearHistory }) => {
   return (
     <div
       className={cn(
@@ -12,6 +12,7 @@ const HistoryHead = () => {
     >
       <h1 className="textGradient text-4xl font-bold">История просмотров</h1>
       <button
+        onClick={clearHistory}
         className={cn(
           "flex gap-x-2 items-center bg-searchText p-3 rounded-md hover:bg-hoveredCard duration-300"
         )}

@@ -12,4 +12,6 @@ export interface Video {
   subscribers: number;
   username: string;
   author_id:number;
+  author_username: string;
+  video_id: number;
 }

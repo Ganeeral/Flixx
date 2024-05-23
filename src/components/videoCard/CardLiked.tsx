@@ -29,9 +29,8 @@ const CardLiked: React.FC<{ video: Video; index: number }> = ({
               {video.title}
             </p>
             <p className="text-sideText text-sm overflow-hidden line-clamp-1">
-              {`${video.author} • `}
-              <FormatWatch video={video} />
-              {` • ${relativeDate}`}
+             {`${video.author_username } • `}
+              {` ${relativeDate}`}
             </p>
           </div>
         </div>

@@ -240,10 +240,19 @@ input::placeholder {
   border-radius: 8px;
 }
 
+.likeHovered {
+  background: #00000015;
+  border-radius: 8px 0 0 8px;
+}
+.disHovered {
+  background: #00000015;
+  border-radius: 8px 0 0 8px;
+}
+
 .likeHover:hover {
   background: #00000015;
-  transition: .2s ease;
   border-radius: 8px 0 0 8px;
+  transition: .2s ease;
 }
 
 .disHover:hover {
