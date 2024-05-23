@@ -1,45 +1,54 @@
 "use client";
 
-
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import useSWR from "swr";
 import Card from "@/components/videoCard/Card";
 import CategorySlider from "@/sections/categoryslider/categorySlider";
 import LineMain from "@/components/lineMain/LineMain";
 import { Video } from "@/types/video";
 
+const fetcher = async (url: string) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Ошибка загрузки данных");
+  }
+  const data = await response.json();
+  return data;
+};
+
 const MainPage: React.FC = () => {
-  const [videos, setVideos] = useState<Video[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<number>(1);
+  const { data: categories, error: categoryError } = useSWR("http://Flixx/src/api/getCategories.php", fetcher);
+  const { data: videos, error: videoError } = useSWR(
+    `http://Flixx/src/api/getVideosByCategory.php?category_id=${selectedCategory}`, 
+    fetcher
+  );
 
-  useEffect(() => {
-    async function fetchVideos() {
-      try {
-        const response = await fetch("http://Flixx/src/api/getVideos.php");
-        const data = await response.json();
+  const handleCategoryChange = (categoryId: number) => {
+    setSelectedCategory(categoryId);
+  };
 
-        if (Array.isArray(data) && data.length > 0) {
-          setVideos(data);
-        } else {
-          console.error("Данные не получены или пусты");
-        }
-      } catch (error) {
-        console.error("Ошибка получения данных:", error);
-      }
-    }
+  if (categoryError) {
+    return <div>Ошибка загрузки категорий: {categoryError.message}</div>;
+  }
 
-    fetchVideos();
-  }, []);
+  if (videoError) {
+    return <div>Ошибка загрузки данных: {videoError.message}</div>;
+  }
 
   return (
     <>
-      <CategorySlider />
+      {categories && (
+        <CategorySlider categories={categories} onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
+      )}
       <LineMain />
-      <div className="grid grid-cols-1 flix:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 m-8">
-        {videos.map((video: Video) => (
+      <div className="grid grid-cols-1 mobile:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 desktop:grid-cols-5 gap-4 m-8">
+        {videos && videos.map((video: Video) => (
           <Card key={video.id} video={video} />
         ))}
       </div>
     </>
   );
-}
+};
 
 export default MainPage;
