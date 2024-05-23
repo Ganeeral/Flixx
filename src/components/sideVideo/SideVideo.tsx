@@ -1,21 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { formatRelativeDate } from "../format/formatDateMain";
 import CardWatch from "../videoCard/CardWatch";
-
-interface Video {
-  id: number;
-  title: string;
-  author: string;
-  views: number;
-  publication_date: string;
-  preview: string;
-  description: string;
-  video_url: string;
-  author_avatar: string;
-  subscribers: number;
-  username: string;
-  relativeDate: string;
-}
+import { Video } from "@/types/video";
 
 const SideVideo: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
