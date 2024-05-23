@@ -5,6 +5,7 @@ import { UploadIcon } from "@/ui/icons";
 import React, { useEffect, useState } from "react";
 import { User } from "@/types/user";
 import { useRouter } from "next/navigation";
+import ChannelPreview from "@/sections/channelPreview/channelPreview";
 
 interface UserData {
   id: string;
@@ -148,7 +149,7 @@ const EditChannel = () => {
 
   return (
     <>
-      {user && <ChannelPreviewSection user={user} video={null} />}
+      {user && <ChannelPreview user={user} video={null} />}
       <div className="m-3">
         <h1 className="textGradient mt-[50px] tablet:ml-[60px] text-2xl font-bold mb-4">
           Редактировать профиль
