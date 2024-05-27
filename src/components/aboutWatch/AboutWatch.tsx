@@ -11,6 +11,7 @@ import { formatRelativeDate } from "../format/formatDateMain";
 import Link from "next/link";
 import { Video } from "@/types/video";
 import LaterButton from "@/ui/buttons/LaterButton";
+import ReportButton from "@/ui/buttons/ReportButton";
 
 interface ChannelInfoProps {
   video: Video | null;
@@ -46,7 +47,7 @@ const AboutWatch: React.FC<ChannelInfoProps> = ({
       <div
         className={cn(
           "flex flex-col gap-y-4",
-          "tablet-lg:flex-row tablet-lg:items-center"
+          "tablet:flex-row tablet:items-center"
         )}
       >
         <div className="video__footer max-h-[128px] w-full items-center gap-x-4 h-auto flex">
@@ -60,7 +61,7 @@ const AboutWatch: React.FC<ChannelInfoProps> = ({
               />
             </Link>
           </div>
-          <div className="flex-grow tablet-lg:flex-grow-0">
+          <div className="flex-grow tablet:flex-grow-0">
             <div className="flex justify-between gap-y-1 gap-x-10 flex-grow">
               <div className="flex flex-col">
                 <p className="leading-5 tracking-[-0.03em] text-sideText">
@@ -81,10 +82,12 @@ const AboutWatch: React.FC<ChannelInfoProps> = ({
           </div>
         </div>
 
-        <div className="flex gap-x-3 ">
+        <div className="flex gap-x-3 flex-wrap tablet:flex-nowrap gap-y-3">
           <LikeBtn videoId={video.id} userId={parseInt(userId, 10)} />
           <ShareBtn />
           {!isOwner && <LaterButton video={video} />}
+
+          <ReportButton videoId={video.id} userId={userId} />
         </div>
       </div>
 

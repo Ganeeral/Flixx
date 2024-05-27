@@ -5,13 +5,24 @@ import AdminGreeting from "@/components/adminGreeting/adminGreeting";
 import HeaderAdmin from "@/components/header/HeaderAdmin";
 import SidebarAdmin from "@/components/sidebar/SidebarAdmin";
 import { useEffect, useState } from "react";
-import withAuth from '@/hoc/withAuth';
+import withAuth from "@/hoc/withAuth";
+import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
+import { useRouter } from "next/navigation";
 
 const AdminLayout: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+
+    if (role != "admin") {
+      router.replace("/channel");
+    }
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -60,6 +71,6 @@ const AdminLayout: React.FC<{
       </div>
     </div>
   );
-}
+};
 
 export default withAuth(AdminLayout);

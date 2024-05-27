@@ -70,11 +70,17 @@ const LoginPage: React.FC = () => {
         });
 
         const data = await response.json();
-        if (data.user_id) {
+        if (data.user_id | data.role) {
           localStorage.setItem("user_id", data.user_id);
+          localStorage.setItem("role", data.role);
+          const role = data.role;
           toast.success("Вход выполнен успешно! Перенаправление...");
           setTimeout(() => {
-            push("/channel");
+            if (role === "admin") {
+              push("/admin/dashboard");
+            } else {
+              push("/channel");
+            }
           }, 1000);
         } else {
           toast.error(data.message);

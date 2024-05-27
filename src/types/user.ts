@@ -4,4 +4,7 @@ export interface User {
   preview:  string;
   author_avatar: string;
   username: string;
+  id:number;
+  date:string;
+  role:string;
 }

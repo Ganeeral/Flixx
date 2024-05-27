@@ -23,6 +23,7 @@ import AboutWatch from "@/components/aboutWatch/AboutWatch";
 import SideVideo from "@/components/sideVideo/SideVideo";
 import CommentsBlock from "@/components/commentsBlock/commentsBlock";
 import { Video } from "@/types/video";
+import ReportButton from "@/ui/buttons/ReportButton";
 
 const Watch = ({
   params,
@@ -94,6 +95,7 @@ const Watch = ({
         </MediaPlayer>
 
         <AboutWatch video={video} currentUserId={currentUserId} channelId={video.author_id} isOwner={isOwner} user={user} />
+ 
         <div className="hidden desktop:block">
           <CommentsBlock video={video} />
         </div>

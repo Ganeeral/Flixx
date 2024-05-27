@@ -1,8 +1,38 @@
 import { IllustarionIcon } from "@/ui/icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import cn from "classnames";
+import axios from "axios";
 
-const AdminGreeting = () => {
+const AdminGreeting: React.FC = () => {
+  const [pendingCount, setPendingCount] = useState(0);
+  const [reportsCount, setReportsCount] = useState(0);
+
+  useEffect(() => {
+    const fetchPendingCount = async () => {
+      try {
+        const response = await axios.get("http://Flixx/src/api/getPendingVideos.php");
+        setPendingCount(response.data.length);
+      } catch (error) {
+        console.error("Ошибка при загрузке количества видео на проверку:", error);
+      }
+    };
+
+    fetchPendingCount();
+  }, []);
+
+  useEffect(() => {
+    const fetchReportCount = async () => {
+      try {
+        const response = await axios.get("http://Flixx/src/api/getVideoReports.php");
+        setReportsCount(response.data.length);
+      } catch (error) {
+        console.error("Ошибка при загрузке количества видео на проверку:", error);
+      }
+    };
+
+    fetchReportCount();
+  }, []);
+
   return (
     <div
       className={cn(
@@ -18,7 +48,7 @@ const AdminGreeting = () => {
             "md-tablet:w-[240px]"
           )}
         >
-          <span className="baloo text-display-3 clamp-title">10</span>
+          <span className="baloo text-display-3 clamp-title">{pendingCount}</span>
           <p className={cn("text-xs", "mobile:text-sm", "flix:text-base")}>
             Видео на <br /> проверку
           </p>
@@ -30,7 +60,7 @@ const AdminGreeting = () => {
             "md-tablet:w-[240px]"
           )}
         >
-          <span className="baloo text-display-3 clamp-title">4</span>
+          <span className="baloo text-display-3 clamp-title">{reportsCount}</span>
           <p
             className={cn(
               "text-xs whitespace-nowrap",
