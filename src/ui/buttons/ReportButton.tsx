@@ -3,7 +3,7 @@ import Modal from "react-modal";
 
 interface ReportButtonProps {
   videoId: number;
-  userId: number;
+  userId: string;
 }
 
 const ReportButton: React.FC<ReportButtonProps> = ({ videoId, userId }) => {
