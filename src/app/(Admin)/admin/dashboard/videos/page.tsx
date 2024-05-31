@@ -14,11 +14,7 @@ interface Category {
   name: string;
 }
 
-interface AdminPendingVideosProps {
-  setPendingCount: (count: number) => void;
-}
-
-const AdminPendingVideos: React.FC<AdminPendingVideosProps> = ({ setPendingCount }) => {
+const AdminPendingVideos: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
@@ -29,7 +25,6 @@ const AdminPendingVideos: React.FC<AdminPendingVideosProps> = ({ setPendingCount
       .get("http://Flixx/src/api/getPendingVideos.php")
       .then((response) => {
         setVideos(response.data);
-        setPendingCount(response.data.length);
       })
       .catch((error) => console.error("Ошибка при загрузке видео:", error));
 
@@ -39,7 +34,7 @@ const AdminPendingVideos: React.FC<AdminPendingVideosProps> = ({ setPendingCount
         setCategories(response.data);
       })
       .catch((error) => console.error("Ошибка при загрузке категорий:", error));
-  }, [setPendingCount]);
+  }, []);
 
   const approveVideo = async (id: number) => {
     if (!selectedCategory) {
@@ -54,7 +49,6 @@ const AdminPendingVideos: React.FC<AdminPendingVideosProps> = ({ setPendingCount
       });
       const updatedVideos = videos.filter((video) => video.id !== id);
       setVideos(updatedVideos);
-      setPendingCount(updatedVideos.length);
     } catch (error) {
       console.error("Ошибка при подтверждении видео:", error);
     }
@@ -66,7 +60,6 @@ const AdminPendingVideos: React.FC<AdminPendingVideosProps> = ({ setPendingCount
       .then((response) => {
         const updatedVideos = videos.filter((video) => video.id !== id);
         setVideos(updatedVideos);
-        setPendingCount(updatedVideos.length);
       })
       .catch((error) => console.error("Ошибка при удалении видео:", error));
   };
