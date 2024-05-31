@@ -14,9 +14,11 @@ interface Category {
   name: string;
 }
 
-const AdminPendingVideos: React.FC<{
+interface AdminPendingVideosProps {
   setPendingCount: (count: number) => void;
-}> = ({ setPendingCount }) => {
+}
+
+const AdminPendingVideos: React.FC<AdminPendingVideosProps> = ({ setPendingCount }) => {
   const [videos, setVideos] = useState<Video[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
@@ -135,7 +137,7 @@ const AdminPendingVideos: React.FC<{
                     Выберите категорию
                   </option>
                   {categories.map((category) => (
-                    <option key={category.id} value={category.id}>  
+                    <option key={category.id} value={category.id}>
                       {category.name}
                     </option>
                   ))}
