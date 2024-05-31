@@ -70,14 +70,18 @@ const LoginPage: React.FC = () => {
         });
 
         const data = await response.json();
-        if (data.user_id | data.role) {
+        if (data.user_id | data.role | data.status) {
           localStorage.setItem("user_id", data.user_id);
           localStorage.setItem("role", data.role);
+          localStorage.setItem("status", data.status);
           const role = data.role;
+          const status = data.status;
           toast.success("Вход выполнен успешно! Перенаправление...");
           setTimeout(() => {
             if (role === "admin") {
               push("/admin/dashboard");
+            } else if (status === "blocked") {
+              push("/banned");
             } else {
               push("/channel");
             }

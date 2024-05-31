@@ -9,6 +9,8 @@ const Dropdown: React.FC = () => {
   const { push } = useRouter();
   const handleLogout = () => {
     localStorage.removeItem("user_id");
+    localStorage.removeItem("status");
+    localStorage.removeItem("role");
     push("/auth");
   };
   const [isOpen, setIsOpen] = useState(false);

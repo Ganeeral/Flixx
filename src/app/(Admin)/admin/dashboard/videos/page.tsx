@@ -14,7 +14,9 @@ interface Category {
   name: string;
 }
 
-const AdminPendingVideos: React.FC<{ setPendingCount: (count: number) => void }> = ({ setPendingCount }) => {
+const AdminPendingVideos: React.FC<{
+  setPendingCount: (count: number) => void;
+}> = ({ setPendingCount }) => {
   const [videos, setVideos] = useState<Video[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
@@ -28,7 +30,7 @@ const AdminPendingVideos: React.FC<{ setPendingCount: (count: number) => void }>
         setPendingCount(response.data.length);
       })
       .catch((error) => console.error("Ошибка при загрузке видео:", error));
-    
+
     axios
       .get("http://Flixx/src/api/getCategories.php")
       .then((response) => {
@@ -44,7 +46,10 @@ const AdminPendingVideos: React.FC<{ setPendingCount: (count: number) => void }>
     }
 
     try {
-      await axios.post("http://Flixx/src/api/approveVideo.php", { video_id: id, category_id: selectedCategory });
+      await axios.post("http://Flixx/src/api/approveVideo.php", {
+        video_id: id,
+        category_id: selectedCategory,
+      });
       const updatedVideos = videos.filter((video) => video.id !== id);
       setVideos(updatedVideos);
       setPendingCount(updatedVideos.length);
@@ -61,9 +66,7 @@ const AdminPendingVideos: React.FC<{ setPendingCount: (count: number) => void }>
         setVideos(updatedVideos);
         setPendingCount(updatedVideos.length);
       })
-      .catch((error) =>
-        console.error("Ошибка при удалении видео:", error)
-      );
+      .catch((error) => console.error("Ошибка при удалении видео:", error));
   };
 
   return (
@@ -128,16 +131,22 @@ const AdminPendingVideos: React.FC<{ setPendingCount: (count: number) => void }>
                   onChange={(e) => setSelectedCategory(Number(e.target.value))}
                   className="p-2 rounded-md border"
                 >
-                  <option value="" disabled>Выберите категорию</option>
+                  <option value="" disabled>
+                    Выберите категорию
+                  </option>
                   {categories.map((category) => (
-                    <option key={category.id} value={category.id}>{category.name}</option>
+                    <option key={category.id} value={category.id}>  
+                      {category.name}
+                    </option>
                   ))}
                 </select>
               </div>
               <DropdownVideo
                 approve={() => approveVideo(video.id)}
                 onDelete={() => deleteVideo(video.id)}
-                watch={() => router.push(`/admin/dashboard/videos/watch/${video.id}`)}
+                watch={() =>
+                  router.push(`/admin/dashboard/videos/watch/${video.id}`)
+                }
               />
             </div>
           ))
