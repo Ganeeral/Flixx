@@ -20,9 +20,7 @@ interface VideoReport {
   username: string;
 }
 
-const AdminPendingVideos: React.FC<{
-  setPendingCount: (count: number) => void;
-}> = ({ setPendingCount }) => {
+const AdminPendingVideos: React.FC = () => {
   const [reports, setReports] = useState<VideoReport[]>([]);
   const router = useRouter();
 
@@ -39,7 +37,7 @@ const AdminPendingVideos: React.FC<{
     };
 
     fetchReports();
-  }, [setPendingCount]);
+  }, []);
 
   const handleAction = async (action: string, id: number) => {
     try {
